@@ -29,7 +29,7 @@ class CustomTabBarController: UITabBarController, UITabBarControllerDelegate {
         
         func viewController(for wheelType: WheelType) -> UIViewController {
             let viewController = WheelViewController(wheelType: wheelType)
-            viewController.tabBarItem = UITabBarItem(title: "", image: wheelType.tabItemImage, selectedImage: nil)
+            viewController.tabBarItem = UITabBarItem(title: "", image: wheelType.tabItemImage, selectedImage: wheelType.tabItemImage?.withRenderingMode(.alwaysOriginal))
             
             return viewController
         }
@@ -76,21 +76,21 @@ extension WheelType {
     
     var tabItemTitle: String {
         switch self {
-        case .analog: return "Complementary color scheme"
-        case .tab2: return "Triadic color scheme"
-        case .tab3: return "Analogous color scheme"
-        case .tab4: return "Split-Complementary color scheme"
-        case .tab5: return "Tetradic color scheme"
+        case .type1: return "Complementary color scheme"
+        case .type2: return "Triadic color scheme"
+        case .type3: return "Analogous color scheme"
+        case .type4: return "Split-Complementary color scheme"
+        case .type5: return "Tetradic color scheme"
         }
     }
     
     var tabItemImage: UIImage? {
         return switch self {
-        case .analog: UIImage(systemName: "arrow.triangle.branch")
-        case .tab2: UIImage(systemName: "arrowtriangle.up")
-        case .tab3: UIImage(systemName: "arrow.up.and.down.righttriangle.up.righttriangle.down.fill")
-        case .tab4: UIImage(systemName: "arrowtriangle.down.fill")
-        case .tab5: UIImage(systemName: "envelope.arrow.triangle.branch.fill")
+        case .type1: UIImage.compBar
+        case .type2: UIImage.triadBar
+        case .type3: UIImage.analogBar
+        case .type4: UIImage.splitCompBar
+        case .type5: UIImage.tetradBar
         }
     }
 }

@@ -27,12 +27,6 @@ class RotatingWheel: UIImageView {
         contentMode = .scaleAspectFit
         isUserInteractionEnabled = true
     }
-
-    func rotate(by rotationAmount: CGFloat) {
-        transform = CGAffineTransform(rotationAngle: currentRotation + rotationAmount)
-        currentRotation += rotationAmount
-    }
-
     func resetRotation() {
         // Скидання обертання до початкового стану
         currentRotation = 0
@@ -44,7 +38,11 @@ extension WheelType {
     
     var rotatingOverlayImage: UIImage? {
         return switch self {
-        case .analog: UIImage.wheelTypeAnalog
+        case .type1: UIImage.wheelTypeAnalog
+        case .type2: UIImage.wheelTypeTriadic
+        case .type3: UIImage.wheelTypeTetradic
+        case .type4: UIImage.wheelTypeComplemet
+        case .type5: UIImage.wheelTypeSplitComplement
         default: nil
         }
     }

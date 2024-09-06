@@ -3,7 +3,7 @@ import UIKit
 class ColorWheel: UIImageView {
 
     init() {
-        let wheelImage = UIImage(named: "ColorWheel.Static.Base")
+        let wheelImage = UIImage(named: "ColorStaticBase")
         super.init(image: wheelImage)
         setupView()
     }
@@ -16,5 +16,18 @@ class ColorWheel: UIImageView {
     private func setupView() {
         translatesAutoresizingMaskIntoConstraints = false
         contentMode = .scaleAspectFit
+    }
+}
+
+extension WheelType {
+    
+    var staticWheelType: UIImage? {
+        return switch self {
+        case .type1: UIImage.colorStaticBase
+        case .type2: UIImage.colorStaticTint
+        case .type3: UIImage.colorStaticMixed
+        case .type4: UIImage.colorStaticShade
+        default: nil
+        }
     }
 }

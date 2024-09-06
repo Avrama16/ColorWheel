@@ -10,7 +10,6 @@
 		2F26A8902C5CDBE500889F30 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F26A88F2C5CDBE500889F30 /* AppDelegate.swift */; };
 		2F26A8922C5CDBE500889F30 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F26A8912C5CDBE500889F30 /* SceneDelegate.swift */; };
 		2F26A8992C5CDBE600889F30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F26A8982C5CDBE600889F30 /* Assets.xcassets */; };
-		2F26A8A62C5F714B00889F30 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F26A8A52C5F714B00889F30 /* Model.swift */; };
 		2F26A8A82C5F768600889F30 /* UITabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F26A8A72C5F768600889F30 /* UITabBarController.swift */; };
 		2F26A8AA2C5F7CCB00889F30 /* ComplementaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F26A8A92C5F7CCB00889F30 /* ComplementaryViewController.swift */; };
 		2F26A8AC2C5F7CE900889F30 /* TriadicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F26A8AB2C5F7CE900889F30 /* TriadicViewController.swift */; };
@@ -29,7 +28,6 @@
 		2F26A8912C5CDBE500889F30 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		2F26A8982C5CDBE600889F30 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2F26A89D2C5CDBE600889F30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2F26A8A52C5F714B00889F30 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		2F26A8A72C5F768600889F30 /* UITabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITabBarController.swift; sourceTree = "<group>"; };
 		2F26A8A92C5F7CCB00889F30 /* ComplementaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplementaryViewController.swift; sourceTree = "<group>"; };
 		2F26A8AB2C5F7CE900889F30 /* TriadicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriadicViewController.swift; sourceTree = "<group>"; };
@@ -79,7 +77,6 @@
 				2F4B12032C6A14F800C9B421 /* LanguageSelectionViewController.swift */,
 				2F4B12002C6A131600C9B421 /* Controllers */,
 				2F4B12052C6A183C00C9B421 /* Views */,
-				2F26A8A52C5F714B00889F30 /* Model.swift */,
 				2F26A8982C5CDBE600889F30 /* Assets.xcassets */,
 				2F26A89D2C5CDBE600889F30 /* Info.plist */,
 			);
@@ -176,7 +173,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2F26A8A62C5F714B00889F30 /* Model.swift in Sources */,
 				2F4B12022C6A14C800C9B421 /* MainViewController.swift in Sources */,
 				2F26A8AE2C5F7CF500889F30 /* WheelViewController.swift in Sources */,
 				2F26A8B02C5F7CFE00889F30 /* SplitCompViewController.swift in Sources */,
