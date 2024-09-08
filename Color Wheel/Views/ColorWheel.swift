@@ -3,6 +3,8 @@ import UIKit
 class ColorWheel: UIImageView {
 
     init() {
+     
+
         let wheelImage = UIImage(named: "ColorStaticBase")
         super.init(image: wheelImage)
         setupView()
@@ -31,3 +33,13 @@ extension WheelType {
         }
     }
 }
+
+
+
+//@objc func changeWheelState() {
+//        if let currentIndex = WheelState.allCases.firstIndex(of: currentWheelState) {
+//            // Перемикаємо на наступний стейт, якщо це не останній
+//            let nextIndex = (currentIndex + 1) % WheelState.allCases.count
+//            currentWheelState = WheelState.allCases[nextIndex]
+//        }
+//    }
