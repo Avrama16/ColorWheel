@@ -10,7 +10,8 @@ class RotatingWheel: UIImageView {
     private var lastVelocity: CGPoint = .zero
     private var targetRotation: CGFloat = 0
     private var displayLink: CADisplayLink?
-    private var smoothingFactor: CGFloat = 0.9 // Фактор згладжування (0.0-1.0)
+    private var smoothingFactor: CGFloat = 0.4 // Зменшуємо фактор згладжування для ще більш швидкої реакції
+    private let rotationSpeedMultiplier: CGFloat = 2.0 // Збільшуємо множник швидкості
     
     init(wheelType: WheelType) {
         super.init(image: wheelType.rotatingOverlayImage)
@@ -83,9 +84,10 @@ class RotatingWheel: UIImageView {
             normalizedDiff += 2 * .pi
         }
         
-        // Застосовуємо згладжування
+        // Застосовуємо згладжування з урахуванням швидкості
         if abs(normalizedDiff) > 0.001 {
-            currentRotation += normalizedDiff * smoothingFactor
+            let speed = min(abs(normalizedDiff) * rotationSpeedMultiplier, 1.0)
+            currentRotation += normalizedDiff * smoothingFactor * speed
             transform = CGAffineTransform(rotationAngle: currentRotation)
         }
     }
@@ -123,8 +125,9 @@ class RotatingWheel: UIImageView {
                 angleDifference += 2 * .pi
             }
             
-            // Оновлюємо цільовий кут
-            targetRotation += angleDifference
+            // Оновлюємо цільовий кут з урахуванням швидкості
+            let speed = min(sqrt(pow(velocity.x, 2) + pow(velocity.y, 2)) / 800, 1.0) // Зменшуємо знаменник для більшої чутливості
+            targetRotation += angleDifference * (1 + speed)
             
             // Оновлюємо останній кут
             lastAngle = currentAngle
@@ -155,10 +158,10 @@ class RotatingWheel: UIImageView {
         
         // Змінюємо фактор згладжування для швидшого притискання
         let originalSmoothingFactor = smoothingFactor
-        smoothingFactor = 0.5
+        smoothingFactor = 0.3 // Зменшуємо для ще швидшого притискання
         
         // Повертаємо оригінальний фактор згладжування після анімації
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) { [weak self] in // Зменшуємо час анімації
             self?.smoothingFactor = originalSmoothingFactor
         }
     }

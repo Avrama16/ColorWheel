@@ -59,7 +59,7 @@ final class WheelViewController: UIViewController {
     private let rotatingWheel: RotatingWheel
     private let titleLabel = UILabel()
     private let hintButton = UIButton()
-    private let changeWheel = UIButton()
+    private var changeWheel = UIButton()
     
     let popupView = UIView()
     let okButton = UIButton(type: .system)
@@ -85,6 +85,16 @@ final class WheelViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Налаштування навігаційного контролера
+        navigationItem.title = nil // Прибираємо заголовок
+        
+        // Налаштування changeWheel
+        let changeWheelButton = UIButton(type: .custom)
+        changeWheelButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        changeWheelButton.setImage(.changeColorWheel, for: .normal)
+        changeWheelButton.addTarget(self, action: #selector(changeWheelTapped), for: .touchUpInside)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: changeWheelButton)
         
         setupLayout()
         
@@ -234,7 +244,7 @@ final class WheelViewController: UIViewController {
             staticWheel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             staticWheel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             staticWheel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            staticWheel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            staticWheel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -50),
             staticWheel.heightAnchor.constraint(equalTo: staticWheel.widthAnchor)
         ])
         print("WheelViewController: Static wheel added to view hierarchy")
@@ -294,11 +304,6 @@ final class WheelViewController: UIViewController {
             hintButton.heightAnchor.constraint(equalToConstant: 40),
             hintButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
-        
-        // Налаштування changeWheel
-        changeWheel.setImage(.changeColorWheel, for: [])
-        changeWheel.addTarget(self, action: #selector(changeWheelTapped), for: .touchUpInside)
-        navigationItem.leftBarButtonItem = .init(customView: changeWheel)
         
         print("WheelViewController: Layout setup completed")
     }
