@@ -313,5 +313,32 @@ final class WheelViewController: UIViewController {
         let languageSelectionVC = LanguageSelectionViewController()
         navigationController?.pushViewController(languageSelectionVC, animated: true)
     }
+    
+    private func rotateWheel(to angle: CGFloat) {
+        print("WheelViewController: Rotating wheel to angle: \(angle)")
+        
+        // Визначаємо найближчий кут секції
+        let numberOfSections = 12 // Фіксована кількість секцій для всіх типів колеса
+        let sectionAngle = 2 * .pi / CGFloat(numberOfSections)
+        let nearestSection = round(angle / sectionAngle) * sectionAngle
+        
+        // Визначаємо тривалість анімації на основі кута повороту
+        let baseDuration = 0.2 // Зменшуємо базову тривалість для швидшої анімації
+        let angleRatio = min(abs(angle - nearestSection) / sectionAngle, 1.0)
+        let duration = baseDuration * (0.5 + 0.5 * angleRatio) // Мінімум 0.1с, максимум 0.2с
+        
+        print("WheelViewController: Starting rotation animation with duration: \(duration)")
+        UIView.animate(
+            withDuration: duration,
+            delay: 0,
+            options: [.curveEaseOut],
+            animations: {
+                self.rotatingWheel.transform = CGAffineTransform(rotationAngle: nearestSection)
+            },
+            completion: { _ in
+                print("WheelViewController: Rotation animation completed")
+            }
+        )
+    }
 }
 
