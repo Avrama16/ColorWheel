@@ -16,7 +16,6 @@ class MainViewController: CustomTabBarController {
     }
     
     func setupUI() {
-        view.backgroundColor = .white
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Language", style: .plain, target: self, action: #selector(showLanguageSelection))
     }
     

@@ -10,9 +10,8 @@
 		2F26A8902C5CDBE500889F30 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F26A88F2C5CDBE500889F30 /* AppDelegate.swift */; };
 		2F26A8922C5CDBE500889F30 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F26A8912C5CDBE500889F30 /* SceneDelegate.swift */; };
 		2F26A8992C5CDBE600889F30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F26A8982C5CDBE600889F30 /* Assets.xcassets */; };
-		2F26A8A82C5F768600889F30 /* UITabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F26A8A72C5F768600889F30 /* UITabBarController.swift */; };
+		2F26A8A82C5F768600889F30 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F26A8A72C5F768600889F30 /* CustomTabBarController.swift */; };
 		2F26A8AE2C5F7CF500889F30 /* WheelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F26A8AD2C5F7CF500889F30 /* WheelViewController.swift */; };
-		2F4B12022C6A14C800C9B421 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4B12012C6A14C800C9B421 /* MainViewController.swift */; };
 		2F4B12042C6A14F800C9B421 /* LanguageSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4B12032C6A14F800C9B421 /* LanguageSelectionViewController.swift */; };
 		2F4B12072C6A184D00C9B421 /* RotatingWheel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4B12062C6A184D00C9B421 /* RotatingWheel.swift */; };
 		2FC01E122C788FDE00B5F508 /* ColorWheel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC01E112C788FDE00B5F508 /* ColorWheel.swift */; };
@@ -24,9 +23,8 @@
 		2F26A8912C5CDBE500889F30 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		2F26A8982C5CDBE600889F30 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2F26A89D2C5CDBE600889F30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2F26A8A72C5F768600889F30 /* UITabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITabBarController.swift; sourceTree = "<group>"; };
+		2F26A8A72C5F768600889F30 /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		2F26A8AD2C5F7CF500889F30 /* WheelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelViewController.swift; sourceTree = "<group>"; };
-		2F4B12012C6A14C800C9B421 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		2F4B12032C6A14F800C9B421 /* LanguageSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSelectionViewController.swift; sourceTree = "<group>"; };
 		2F4B12062C6A184D00C9B421 /* RotatingWheel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotatingWheel.swift; sourceTree = "<group>"; };
 		2FC01E112C788FDE00B5F508 /* ColorWheel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorWheel.swift; sourceTree = "<group>"; };
@@ -64,8 +62,7 @@
 			children = (
 				2F26A88F2C5CDBE500889F30 /* AppDelegate.swift */,
 				2F26A8912C5CDBE500889F30 /* SceneDelegate.swift */,
-				2F26A8A72C5F768600889F30 /* UITabBarController.swift */,
-				2F4B12012C6A14C800C9B421 /* MainViewController.swift */,
+				2F26A8A72C5F768600889F30 /* CustomTabBarController.swift */,
 				2F4B12032C6A14F800C9B421 /* LanguageSelectionViewController.swift */,
 				2F4B12002C6A131600C9B421 /* Controllers */,
 				2F4B12052C6A183C00C9B421 /* Views */,
@@ -161,9 +158,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2F4B12022C6A14C800C9B421 /* MainViewController.swift in Sources */,
 				2F26A8AE2C5F7CF500889F30 /* WheelViewController.swift in Sources */,
-				2F26A8A82C5F768600889F30 /* UITabBarController.swift in Sources */,
+				2F26A8A82C5F768600889F30 /* CustomTabBarController.swift in Sources */,
 				2F4B12042C6A14F800C9B421 /* LanguageSelectionViewController.swift in Sources */,
 				2F4B12072C6A184D00C9B421 /* RotatingWheel.swift in Sources */,
 				2F26A8902C5CDBE500889F30 /* AppDelegate.swift in Sources */,
