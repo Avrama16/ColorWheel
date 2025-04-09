@@ -14,6 +14,8 @@
 		2F26A8AE2C5F7CF500889F30 /* WheelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F26A8AD2C5F7CF500889F30 /* WheelViewController.swift */; };
 		2F4B12042C6A14F800C9B421 /* LanguageSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4B12032C6A14F800C9B421 /* LanguageSelectionViewController.swift */; };
 		2F4B12072C6A184D00C9B421 /* RotatingWheel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4B12062C6A184D00C9B421 /* RotatingWheel.swift */; };
+		2F8A40EC2DA67A1C00076D34 /* GT-Eesti-Text-Thin-Trial.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2F8A40EB2DA67A1C00076D34 /* GT-Eesti-Text-Thin-Trial.otf */; };
+		2F8A40EE2DA6BA1400076D34 /* GT-Eesti-Text-Regular-Trial.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2F8A40ED2DA6BA1400076D34 /* GT-Eesti-Text-Regular-Trial.otf */; };
 		2FC01E122C788FDE00B5F508 /* ColorWheel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC01E112C788FDE00B5F508 /* ColorWheel.swift */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +29,8 @@
 		2F26A8AD2C5F7CF500889F30 /* WheelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WheelViewController.swift; sourceTree = "<group>"; };
 		2F4B12032C6A14F800C9B421 /* LanguageSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSelectionViewController.swift; sourceTree = "<group>"; };
 		2F4B12062C6A184D00C9B421 /* RotatingWheel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotatingWheel.swift; sourceTree = "<group>"; };
+		2F8A40EB2DA67A1C00076D34 /* GT-Eesti-Text-Thin-Trial.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GT-Eesti-Text-Thin-Trial.otf"; sourceTree = "<group>"; };
+		2F8A40ED2DA6BA1400076D34 /* GT-Eesti-Text-Regular-Trial.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GT-Eesti-Text-Regular-Trial.otf"; sourceTree = "<group>"; };
 		2FC01E112C788FDE00B5F508 /* ColorWheel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorWheel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -68,6 +72,8 @@
 				2F4B12052C6A183C00C9B421 /* Views */,
 				2F26A8982C5CDBE600889F30 /* Assets.xcassets */,
 				2F26A89D2C5CDBE600889F30 /* Info.plist */,
+				2F8A40EB2DA67A1C00076D34 /* GT-Eesti-Text-Thin-Trial.otf */,
+				2F8A40ED2DA6BA1400076D34 /* GT-Eesti-Text-Regular-Trial.otf */,
 			);
 			path = "Color Wheel";
 			sourceTree = "<group>";
@@ -147,6 +153,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F8A40EE2DA6BA1400076D34 /* GT-Eesti-Text-Regular-Trial.otf in Resources */,
+				2F8A40EC2DA67A1C00076D34 /* GT-Eesti-Text-Thin-Trial.otf in Resources */,
 				2F26A8992C5CDBE600889F30 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

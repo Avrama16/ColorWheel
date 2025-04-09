@@ -61,12 +61,18 @@ final class WheelViewController: UIViewController {
     private let hintButton = UIButton()
     private var changeWheel = UIButton()
     
-    let popupView = UIView()
-    let okButton = UIButton(type: .system)
-    let closeButton = UIButton(type: .system)
-    let backgroundView = UIView()
+    // Власний навігаційний бар
+    private let customNavigationBar = UIView()
+    private let changeWheelButton = UIButton(type: .custom)
+    private let infoButton = UIButton(type: .custom)
+    
+    var popupView = UIView()
+    var okButton = UIButton(type: .system)
+    var closeButton = UIButton(type: .system)
+    var backgroundView = UIView()
     
     init(wheelType: WheelType) {
+        print("WheelViewController: Initializing with wheelType: \(wheelType)")
         self.wheelType = wheelType
         rotatingWheel = .init(wheelType: wheelType)
         titleLabel.text = wheelType.tabItemTitle
@@ -76,6 +82,9 @@ final class WheelViewController: UIViewController {
         // Завантажуємо збережений стан
         if let tabBarController = self.tabBarController as? CustomTabBarController {
             self.currentWheelState = tabBarController.currentStaticWheelType
+            print("WheelViewController: Loaded saved state: \(self.currentWheelState)")
+        } else {
+            print("WheelViewController: No tabBarController found during initialization")
         }
     }
     
@@ -85,16 +94,13 @@ final class WheelViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("WheelViewController: viewDidLoad called")
         
-        // Налаштування навігаційного контролера
-        navigationItem.title = nil // Прибираємо заголовок
+        // Приховуємо стандартний навігаційний бар
+        navigationController?.setNavigationBarHidden(true, animated: false)
         
-        // Налаштування changeWheel
-        let changeWheelButton = UIButton(type: .custom)
-        changeWheelButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-        changeWheelButton.setImage(.changeColorWheel, for: .normal)
-        changeWheelButton.addTarget(self, action: #selector(changeWheelTapped), for: .touchUpInside)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: changeWheelButton)
+        // Налаштування власного навігаційного бару
+        setupCustomNavigationBar()
         
         setupLayout()
         
@@ -105,6 +111,138 @@ final class WheelViewController: UIViewController {
             name: .staticWheelTypeDidChange,
             object: nil
         )
+        
+        print("WheelViewController: viewDidLoad completed")
+    }
+    
+    private func setupCustomNavigationBar() {
+        // Налаштування власного навігаційного бару
+        customNavigationBar.backgroundColor = .white
+        customNavigationBar.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(customNavigationBar)
+        
+        NSLayoutConstraint.activate([
+            customNavigationBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            customNavigationBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            customNavigationBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            customNavigationBar.heightAnchor.constraint(equalToConstant: 44)
+        ])
+        
+        // Налаштування кнопки changeWheel
+        changeWheelButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        changeWheelButton.setImage(.changeColorWheel, for: .normal)
+        changeWheelButton.addTarget(self, action: #selector(changeWheelTapped), for: .touchUpInside)
+        changeWheelButton.translatesAutoresizingMaskIntoConstraints = false
+        customNavigationBar.addSubview(changeWheelButton)
+        
+        NSLayoutConstraint.activate([
+            changeWheelButton.leadingAnchor.constraint(equalTo: customNavigationBar.leadingAnchor, constant: 16),
+            changeWheelButton.centerYAnchor.constraint(equalTo: customNavigationBar.centerYAnchor),
+            changeWheelButton.widthAnchor.constraint(equalToConstant: 30),
+            changeWheelButton.heightAnchor.constraint(equalToConstant: 30)
+        ])
+        
+        // Налаштування кнопки Info
+        infoButton.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        let infoImage = UIImage(systemName: "info.circle")?.withConfiguration(
+            UIImage.SymbolConfiguration(pointSize: 24, weight: .regular)
+        )
+        infoButton.setImage(infoImage, for: .normal)
+        infoButton.tintColor = UIColor(red: 74/255, green: 91/255, blue: 57/255, alpha: 1.0)
+        infoButton.addTarget(self, action: #selector(showInfo), for: .touchUpInside)
+        infoButton.translatesAutoresizingMaskIntoConstraints = false
+        customNavigationBar.addSubview(infoButton)
+        
+        NSLayoutConstraint.activate([
+            infoButton.trailingAnchor.constraint(equalTo: customNavigationBar.trailingAnchor, constant: -16),
+            infoButton.centerYAnchor.constraint(equalTo: customNavigationBar.centerYAnchor),
+            infoButton.widthAnchor.constraint(equalToConstant: 40),
+            infoButton.heightAnchor.constraint(equalToConstant: 40)
+        ])
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Приховуємо стандартний навігаційний бар
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
+    private func setupLayout() {
+        view.backgroundColor = .white
+        
+        // Налаштування статичного колеса
+        staticWheel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(staticWheel)
+        NSLayoutConstraint.activate([
+            staticWheel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            staticWheel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -50),
+            staticWheel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+            staticWheel.heightAnchor.constraint(equalTo: staticWheel.widthAnchor)
+        ])
+        
+        // Налаштування обертаючогося колеса
+        rotatingWheel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(rotatingWheel)
+        NSLayoutConstraint.activate([
+            rotatingWheel.centerXAnchor.constraint(equalTo: staticWheel.centerXAnchor),
+            rotatingWheel.centerYAnchor.constraint(equalTo: staticWheel.centerYAnchor),
+            rotatingWheel.widthAnchor.constraint(equalTo: staticWheel.widthAnchor),
+            rotatingWheel.heightAnchor.constraint(equalTo: staticWheel.heightAnchor)
+        ])
+        
+        // Налаштування кнопки Hint
+        hintButton.translatesAutoresizingMaskIntoConstraints = false
+        hintButton.setTitle("Hint", for: .normal)
+        hintButton.addTarget(self, action: #selector(showHint), for: .touchUpInside)
+        hintButton.setTitleColor(.white, for: .normal)
+        hintButton.backgroundColor = UIColor(red: 74/255, green: 91/255, blue: 57/255, alpha: 1.0)
+        if let customFont = UIFont(name: "GT-Eesti-Text-Bold-Trial", size: 16) {
+            hintButton.titleLabel?.font = customFont
+        } else {
+            print("WheelViewController: Failed to load GT-Eesti-Text-Bold-Trial font, using system font")
+            hintButton.titleLabel?.font = .boldSystemFont(ofSize: 16)
+        }
+        hintButton.layer.cornerRadius = 27
+        view.addSubview(hintButton)
+        NSLayoutConstraint.activate([
+            hintButton.topAnchor.constraint(equalTo: staticWheel.bottomAnchor, constant: 40),
+            hintButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            hintButton.widthAnchor.constraint(equalToConstant: 200),
+            hintButton.heightAnchor.constraint(equalToConstant: 54)
+        ])
+        
+        // Налаштування заголовка
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        if let customFont = UIFont(name: "GT-Eesti-Text-Regular-Trial", size: 14) {
+            titleLabel.font = customFont
+        } else {
+            titleLabel.font = .systemFont(ofSize: 14)
+        }
+        titleLabel.textColor = .darkGray
+        titleLabel.backgroundColor = .white
+        titleLabel.layer.cornerRadius = 10
+        titleLabel.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        titleLabel.layer.borderWidth = 0.5
+        titleLabel.layer.borderColor = UIColor.lightGray.cgColor
+        titleLabel.textAlignment = .center
+        titleLabel.clipsToBounds = true
+        
+        // Додаємо відступи для тексту
+        titleLabel.layoutMargins = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
+        
+        // Встановлюємо фіксовану ширину для найдовшого тексту
+        let longestText = "Split-Complementary color scheme"
+        let size = (longestText as NSString).size(withAttributes: [.font: titleLabel.font as Any])
+        let width = size.width + 20 // Додаємо відступи
+        
+        view.addSubview(titleLabel)
+        NSLayoutConstraint.activate([
+            titleLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
+            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            titleLabel.widthAnchor.constraint(equalToConstant: width),
+            titleLabel.heightAnchor.constraint(equalToConstant: 30)
+        ])
     }
     
     deinit {
@@ -137,9 +275,19 @@ final class WheelViewController: UIViewController {
     }
     
     @objc func showHint() {
+        // Перевіряємо, чи вже відкритий попап
+        if popupView.superview != nil {
+            return
+        }
+        
+        // Створюємо нові екземпляри для кожного відкриття попапу
+        let popupView = UIView()
+        let backgroundView = UIView()
+        let okButton = UIButton(type: .system)
+        
         // Налаштування головного pop-up вікна
         let popupWidth: CGFloat = 368
-        let popupHeight: CGFloat = 380
+        let popupHeight: CGFloat = 420
         let screenWidth = view.frame.width
         let screenHeight = view.frame.height
         
@@ -163,10 +311,10 @@ final class WheelViewController: UIViewController {
         popupView.layer.shadowRadius = 10
         backgroundView.addSubview(popupView)
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(closePopup))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(closePopup(_:)))
         backgroundView.addGestureRecognizer(tapGesture)
         
-        // Додаємо зображення з таббару (збільшуємо відстань від верхнього краю)
+        // Додаємо зображення з таббару
         let tabImageView = UIImageView(frame: CGRect(x: 0, y: 20, width: popupWidth, height: 80))
         tabImageView.contentMode = .scaleAspectFit
         tabImageView.image = wheelType.tabItemImage
@@ -175,143 +323,227 @@ final class WheelViewController: UIViewController {
         tabImageView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         popupView.addSubview(tabImageView)
         
-        // Налаштування заголовка (збільшуємо відстань)
+        // Налаштування заголовка
         let titleLabel = UILabel(frame: CGRect(x: 0, y: 110, width: popupWidth, height: 30))
         titleLabel.text = wheelType.tabItemTitle
         titleLabel.textAlignment = .center
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        if let customFont = UIFont(name: "GT-Eesti-Text-Bold-Trial", size: 14) {
+            titleLabel.font = customFont
+        } else {
+            titleLabel.font = .boldSystemFont(ofSize: 14)
+        }
+        titleLabel.textColor = .darkGray
         popupView.addSubview(titleLabel)
         
-        // Створюємо футер для тексту (збільшуємо розмір)
-        let footerHeight: CGFloat = 120
-        let footerView = UIView(frame: CGRect(x: 0, y: 150, width: popupWidth, height: footerHeight))
-        footerView.backgroundColor = .white
-        popupView.addSubview(footerView)
-        
-        // Створюємо скролв'ю для тексту всередині футера
-        let scrollView = UIScrollView(frame: CGRect(x: 0, y: 0, width: popupWidth, height: footerHeight))
-        scrollView.showsVerticalScrollIndicator = true
-        footerView.addSubview(scrollView)
-        
-        // Налаштування тексту повідомлення (збільшуємо розмір шрифту)
-        let messageLabel = UILabel(frame: CGRect(x: 20, y: 0, width: popupWidth - 40, height: 0))
-        messageLabel.text = "An analogous color scheme is based on using colors that are next to each other on the color wheel. Analogous colors can look even more interesting when various textures are added. Use accessories in analogous colors for accents."
-        messageLabel.numberOfLines = 0
+        // Додаємо текст підказки
+        let messageLabel = UILabel(frame: CGRect(x: 20, y: 150, width: popupWidth - 40, height: 0))
+        messageLabel.text = getHintText(for: wheelType)
         messageLabel.textAlignment = .center
-        messageLabel.font = UIFont.systemFont(ofSize: 16)
+        messageLabel.numberOfLines = 0
+        if let customFont = UIFont(name: "GT-Eesti-Text-Regular-Trial", size: 16) {
+            messageLabel.font = customFont
+        } else {
+            messageLabel.font = .systemFont(ofSize: 16)
+        }
+        messageLabel.textColor = .darkGray
         
-        // Розраховуємо розмір тексту
-        let maxSize = CGSize(width: popupWidth - 40, height: .greatestFiniteMagnitude)
-        let textSize = messageLabel.sizeThatFits(maxSize)
-        messageLabel.frame.size.height = textSize.height
+        // Розрахунок розміру тексту
+        messageLabel.sizeToFit()
+        popupView.addSubview(messageLabel)
         
-        scrollView.addSubview(messageLabel)
-        scrollView.contentSize = CGSize(width: popupWidth, height: textSize.height)
+        // Оновлюємо висоту попапу в залежності від розміру тексту
+        let newPopupHeight = messageLabel.frame.height + 250 // Додаємо простір для заголовка, футера та кнопки
+        popupView.frame.size.height = newPopupHeight
+        popupView.frame.origin.y = (screenHeight - newPopupHeight) / 2
         
-        // Налаштування кнопки OK (робимо темно-синьою з контрастним текстом)
-        okButton.setTitle("Ok, got it", for: .normal)
-        okButton.backgroundColor = .systemIndigo
+        // Оновлюємо позицію кнопки OK
+        okButton.frame = CGRect(x: 20, y: newPopupHeight - 70, width: popupWidth - 40, height: 50)
+        okButton.center.x = popupView.frame.width / 2
+        okButton.setTitle("Ok. got it", for: .normal)
         okButton.setTitleColor(.white, for: .normal)
-        okButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-        okButton.layer.cornerRadius = 10
-        okButton.frame = CGRect(x: 20, y: popupHeight - 60, width: popupWidth - 40, height: 40)
-        okButton.addTarget(self, action: #selector(closePopup), for: .touchUpInside)
+        okButton.backgroundColor = UIColor(red: 74/255, green: 91/255, blue: 57/255, alpha: 1.0)
+        if let customFont = UIFont(name: "GT-Eesti-Text-Bold-Trial", size: 16) {
+            okButton.titleLabel?.font = customFont
+        } else {
+            okButton.titleLabel?.font = .boldSystemFont(ofSize: 16)
+        }
+        okButton.layer.cornerRadius = 25
+        okButton.addTarget(self, action: #selector(closePopup(_:)), for: .touchUpInside)
         popupView.addSubview(okButton)
         
+        // Зберігаємо посилання на view для закриття
+        self.popupView = popupView
+        self.backgroundView = backgroundView
+        
         // Анімація появи попапу
-        UIView.animate(withDuration: 0.3, animations: {
-            self.popupView.frame.origin.y = yPosition
-        })
+        UIView.animate(withDuration: 0.3) {
+            popupView.frame.origin.y = yPosition
+        }
     }
     
-    @objc func closePopup() {
-        UIView.animate(withDuration: 0.3, animations: {
-            self.popupView.frame.origin.y = self.view.frame.height
-        }, completion: { _ in
-            self.backgroundView.removeFromSuperview()
-        })
-    }
-    
-    private func setupLayout() {
-        print("WheelViewController: Setting up layout")
-        
-        // Спочатку додаємо staticWheel
-        staticWheel.isUserInteractionEnabled = false
-        print("WheelViewController: Static wheel - isUserInteractionEnabled: \(staticWheel.isUserInteractionEnabled)")
-        view.addSubview(staticWheel)
-        staticWheel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            staticWheel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            staticWheel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            staticWheel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            staticWheel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -50),
-            staticWheel.heightAnchor.constraint(equalTo: staticWheel.widthAnchor)
-        ])
-        print("WheelViewController: Static wheel added to view hierarchy")
-        
-        // Потім додаємо rotatingWheel поверх staticWheel
-        rotatingWheel.isUserInteractionEnabled = true
-        print("WheelViewController: Rotating wheel - isUserInteractionEnabled: \(rotatingWheel.isUserInteractionEnabled)")
-        view.addSubview(rotatingWheel)
-        rotatingWheel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            rotatingWheel.leadingAnchor.constraint(equalTo: staticWheel.leadingAnchor),
-            rotatingWheel.trailingAnchor.constraint(equalTo: staticWheel.trailingAnchor),
-            rotatingWheel.topAnchor.constraint(equalTo: staticWheel.topAnchor),
-            rotatingWheel.bottomAnchor.constraint(equalTo: staticWheel.bottomAnchor)
-        ])
-        print("WheelViewController: Rotating wheel added to view hierarchy")
-        
-        // Налаштування titleLabel
-        titleLabel.font = .systemFont(ofSize: 14)
-        titleLabel.textColor = .darkGray
-        titleLabel.backgroundColor = .white
-        titleLabel.layer.cornerRadius = 10
-        titleLabel.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        titleLabel.layer.borderWidth = 0.5
-        titleLabel.layer.borderColor = UIColor.lightGray.cgColor
-        titleLabel.textAlignment = .center
-        titleLabel.clipsToBounds = true
-        
-        // Додаємо відступи для тексту
-        titleLabel.layoutMargins = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
-        
-        // Встановлюємо фіксовану ширину для найдовшого тексту
-        let longestText = "Split-Complementary color scheme"
-        let size = (longestText as NSString).size(withAttributes: [.font: titleLabel.font!])
-        let width = size.width + 20 // Додаємо відступи
-        
-        view.addSubview(titleLabel)
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            titleLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
-            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            titleLabel.widthAnchor.constraint(equalToConstant: width),
-            titleLabel.heightAnchor.constraint(equalToConstant: 30)
-        ])
-        
-        // Налаштування hintButton
-        hintButton.setTitle("Hint", for: .normal)
-        hintButton.addTarget(self, action: #selector(showHint), for: .touchUpInside)
-        hintButton.setTitleColor(.white, for: .normal)
-        hintButton.backgroundColor = .systemIndigo
-        hintButton.layer.cornerRadius = 10
-        hintButton.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(hintButton)
-        NSLayoutConstraint.activate([
-            hintButton.topAnchor.constraint(equalTo: staticWheel.bottomAnchor, constant: 40),
-            hintButton.widthAnchor.constraint(equalToConstant: 100),
-            hintButton.heightAnchor.constraint(equalToConstant: 40),
-            hintButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        ])
-        
-        print("WheelViewController: Layout setup completed")
+    private func getHintText(for wheelType: WheelType) -> String {
+        switch wheelType {
+        case .type1:
+            return "Analogous color scheme consists of colors that are adjacent to each other on the color wheel. These colors create a harmonious and cohesive look. Perfect for creating a unified and soothing design. Great for backgrounds, nature-inspired designs, and when you want to convey a sense of harmony and tranquility. Try using these combinations for interior design, fashion, or creating a calming atmosphere in your artwork."
+        case .type2:
+            return "Complementary color scheme uses colors that are opposite each other on the color wheel. This creates a high contrast and vibrant look. The strong contrast makes both colors appear more intense and creates a dynamic visual impact. Ideal for creating bold statements, highlighting important elements, or adding energy to your design. Perfect for call-to-action buttons, sports branding, or when you want to create a dramatic effect in your artwork."
+        case .type3:
+            return "Triadic color scheme uses three colors that are evenly spaced around the color wheel. This creates a balanced and dynamic look. The three colors form a triangle on the color wheel, offering a rich and diverse palette while maintaining harmony. Great for creating vibrant and energetic designs. Perfect for children's products, playful branding, or when you want to create a fun and lively atmosphere. Try using one color as the dominant shade and the others as accents."
+        case .type4:
+            return "Tetradic color scheme uses four colors that form a rectangle on the color wheel. This creates a rich and complex color palette. The four colors offer endless possibilities for creating sophisticated and layered designs. Excellent for creating depth and visual interest in your work. Perfect for complex designs, detailed illustrations, or when you want to create a rich and luxurious feel. Remember to balance the colors by using one as the dominant shade and the others as supporting elements."
+        case .type5:
+            return "Split-Complementary color scheme uses a base color and two colors adjacent to its complement. This creates a high contrast look while being more versatile than a complementary scheme. The combination offers the energy of complementary colors with more flexibility and harmony. Great for creating dynamic designs that aren't too overwhelming. Perfect for modern branding, web design, or when you want to create an energetic yet balanced composition. Try using the base color as your primary shade and the split-complements as accents."
+        }
     }
     
     @objc 
     private func showLanguageSelection() {
         let languageSelectionVC = LanguageSelectionViewController()
         navigationController?.pushViewController(languageSelectionVC, animated: true)
+    }
+    
+    @objc
+    private func closePopup(_ sender: Any) {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.popupView.frame.origin.y = self.view.frame.height
+            self.backgroundView.alpha = 0
+        }) { _ in
+            // Видаляємо всі підклади
+            for subview in self.popupView.subviews {
+                subview.removeFromSuperview()
+            }
+            
+            // Видаляємо самі view
+            self.popupView.removeFromSuperview()
+            self.backgroundView.removeFromSuperview()
+            
+            // Скидаємо стан кнопки Hint
+            self.hintButton.isEnabled = true
+        }
+    }
+    
+    @objc func showInfo() {
+        // Перевіряємо, чи вже відкритий попап
+        if popupView.superview != nil {
+            return
+        }
+        
+        // Створюємо нові екземпляри для кожного відкриття попапу
+        let popupView = UIView()
+        let backgroundView = UIView()
+        let okButton = UIButton(type: .system)
+        
+        // Налаштування головного pop-up вікна
+        let popupWidth: CGFloat = 368
+        let popupHeight: CGFloat = 420
+        let screenWidth = view.frame.width
+        let screenHeight = view.frame.height
+        
+        // Розрахунок позиції для центрування попапу
+        let xPosition = (screenWidth - popupWidth) / 2
+        let yPosition = (screenHeight - popupHeight) / 2
+        
+        // Налаштування фону
+        backgroundView.frame = view.bounds
+        backgroundView.backgroundColor = UIColor.black.withAlphaComponent(0.4)
+        view.addSubview(backgroundView)
+        
+        // Налаштування попапу
+        popupView.frame = CGRect(x: xPosition, y: screenHeight, width: popupWidth, height: popupHeight)
+        popupView.backgroundColor = .white
+        popupView.layer.cornerRadius = 24
+        popupView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        popupView.layer.shadowColor = UIColor.black.cgColor
+        popupView.layer.shadowOpacity = 0.3
+        popupView.layer.shadowOffset = CGSize(width: 0, height: 5)
+        popupView.layer.shadowRadius = 10
+        backgroundView.addSubview(popupView)
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(closeInfoPopup(_:)))
+        backgroundView.addGestureRecognizer(tapGesture)
+        
+        // Додаємо іконку Info
+        let infoImageView = UIImageView(frame: CGRect(x: 0, y: 20, width: popupWidth, height: 80))
+        infoImageView.contentMode = .scaleAspectFit
+        infoImageView.image = UIImage(systemName: "info.circle.fill")
+        infoImageView.tintColor = UIColor(red: 74/255, green: 91/255, blue: 57/255, alpha: 1.0)
+        infoImageView.backgroundColor = .white
+        infoImageView.layer.cornerRadius = 24
+        infoImageView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        popupView.addSubview(infoImageView)
+        
+        // Налаштування заголовка
+        let titleLabel = UILabel(frame: CGRect(x: 0, y: 110, width: popupWidth, height: 30))
+        titleLabel.text = "About Color Wheel"
+        titleLabel.textAlignment = .center
+        if let customFont = UIFont(name: "GT-Eesti-Text-Bold-Trial", size: 14) {
+            titleLabel.font = customFont
+        } else {
+            titleLabel.font = .boldSystemFont(ofSize: 14)
+        }
+        titleLabel.textColor = .darkGray
+        popupView.addSubview(titleLabel)
+        
+        // Додаємо текст інформації
+        let scrollView = UIScrollView(frame: CGRect(x: 20, y: 150, width: popupWidth - 40, height: 180))
+        scrollView.showsVerticalScrollIndicator = true
+        popupView.addSubview(scrollView)
+        
+        let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: popupWidth - 40, height: 0))
+        messageLabel.text = "Color Wheel is your perfect companion for creating stylish looks! Simply spin the wheel, choose your favorite color combination, and use it to style your outfit. The wheel helps you find harmonious color combinations for any style: from casual to evening wear. Experiment with different combinations to create a unique and expressive look!"
+        messageLabel.textAlignment = .center
+        messageLabel.numberOfLines = 0
+        if let customFont = UIFont(name: "GT-Eesti-Text-Regular-Trial", size: 16) {
+            messageLabel.font = customFont
+        } else {
+            messageLabel.font = .systemFont(ofSize: 16)
+        }
+        messageLabel.textColor = .darkGray
+        
+        // Розрахунок розміру тексту
+        messageLabel.sizeToFit()
+        scrollView.contentSize = CGSize(width: popupWidth - 40, height: messageLabel.frame.height)
+        scrollView.addSubview(messageLabel)
+        
+        // Налаштування кнопки OK
+        okButton.frame = CGRect(x: 20, y: popupHeight - 60, width: popupWidth - 40, height: 50)
+        okButton.setTitle("Let's try", for: .normal)
+        okButton.setTitleColor(.white, for: .normal)
+        okButton.backgroundColor = UIColor(red: 74/255, green: 91/255, blue: 57/255, alpha: 1.0)
+        if let customFont = UIFont(name: "GT-Eesti-Text-Bold-Trial", size: 16) {
+            okButton.titleLabel?.font = customFont
+        } else {
+            okButton.titleLabel?.font = .boldSystemFont(ofSize: 16)
+        }
+        okButton.layer.cornerRadius = 25
+        okButton.addTarget(self, action: #selector(closeInfoPopup(_:)), for: .touchUpInside)
+        popupView.addSubview(okButton)
+        
+        // Зберігаємо посилання на view для закриття
+        self.popupView = popupView
+        self.backgroundView = backgroundView
+        
+        // Анімація появи попапу
+        UIView.animate(withDuration: 0.3) {
+            popupView.frame.origin.y = yPosition
+        }
+    }
+    
+    @objc
+    private func closeInfoPopup(_ sender: Any) {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.popupView.frame.origin.y = self.view.frame.height
+            self.backgroundView.alpha = 0
+        }) { _ in
+            // Видаляємо всі підклади
+            for subview in self.popupView.subviews {
+                subview.removeFromSuperview()
+            }
+            
+            // Видаляємо самі view
+            self.popupView.removeFromSuperview()
+            self.backgroundView.removeFromSuperview()
+        }
     }
     
     private func rotateWheel(to angle: CGFloat) {
@@ -339,6 +571,23 @@ final class WheelViewController: UIViewController {
                 print("WheelViewController: Rotation animation completed")
             }
         )
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        print("WheelViewController: viewDidAppear called")
+        print("WheelViewController: view frame: \(view.frame)")
+        print("WheelViewController: staticWheel frame: \(staticWheel.frame)")
+        print("WheelViewController: rotatingWheel frame: \(rotatingWheel.frame)")
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        // Закриваємо попап, якщо він відкритий
+        if popupView.superview != nil {
+            closePopup(self)
+        }
     }
 }
 

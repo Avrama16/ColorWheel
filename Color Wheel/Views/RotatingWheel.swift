@@ -14,7 +14,10 @@ class RotatingWheel: UIImageView {
     private let rotationSpeedMultiplier: CGFloat = 2.0 // Збільшуємо множник швидкості
     
     init(wheelType: WheelType) {
-        super.init(image: wheelType.rotatingOverlayImage)
+        print("RotatingWheel: Initializing with wheelType: \(wheelType)")
+        let image = wheelType.rotatingOverlayImage
+        print("RotatingWheel: rotatingOverlayImage is \(image != nil ? "loaded" : "nil")")
+        super.init(image: image)
         print("RotatingWheel: Initializing with wheelType: \(wheelType)")
         setupView()
     }
