@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F11335B2DA6FCE400498D34 /* Localizable_UK.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2F1133592DA6FCE400498D34 /* Localizable_UK.strings */; };
+		2F1133662DA7011800498D34 /* Localizable_EN.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2F1133642DA7011800498D34 /* Localizable_EN.strings */; };
+		2F1133692DA7013F00498D34 /* Localizable_ES.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2F1133672DA7013F00498D34 /* Localizable_ES.strings */; };
+		2F11336C2DA7015700498D34 /* Localizable_PL.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2F11336A2DA7015700498D34 /* Localizable_PL.strings */; };
 		2F26A8902C5CDBE500889F30 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F26A88F2C5CDBE500889F30 /* AppDelegate.swift */; };
 		2F26A8922C5CDBE500889F30 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F26A8912C5CDBE500889F30 /* SceneDelegate.swift */; };
 		2F26A8992C5CDBE600889F30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F26A8982C5CDBE600889F30 /* Assets.xcassets */; };
@@ -20,7 +24,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2F26A88C2C5CDBE500889F30 /* Color Wheel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Color Wheel.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F11335A2DA6FCE400498D34 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable_UK.strings; sourceTree = "<group>"; };
+		2F1133652DA7011800498D34 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable_EN.strings; sourceTree = "<group>"; };
+		2F1133682DA7013F00498D34 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable_ES.strings; sourceTree = "<group>"; };
+		2F11336B2DA7015700498D34 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable_PL.strings; sourceTree = "<group>"; };
+		2F26A88C2C5CDBE500889F30 /* Color Wheel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "Color Wheel.app"; path = "/Users/a-avramenko/Desktop/swift/Color Wheel копія/ColorWheel/build/Debug-iphoneos/Color Wheel.app"; sourceTree = "<absolute>"; };
 		2F26A88F2C5CDBE500889F30 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2F26A8912C5CDBE500889F30 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		2F26A8982C5CDBE600889F30 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,16 +57,7 @@
 			isa = PBXGroup;
 			children = (
 				2F26A88E2C5CDBE500889F30 /* Color Wheel */,
-				2F26A88D2C5CDBE500889F30 /* Products */,
 			);
-			sourceTree = "<group>";
-		};
-		2F26A88D2C5CDBE500889F30 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				2F26A88C2C5CDBE500889F30 /* Color Wheel.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		2F26A88E2C5CDBE500889F30 /* Color Wheel */ = {
@@ -74,6 +73,10 @@
 				2F26A89D2C5CDBE600889F30 /* Info.plist */,
 				2F8A40EB2DA67A1C00076D34 /* GT-Eesti-Text-Thin-Trial.otf */,
 				2F8A40ED2DA6BA1400076D34 /* GT-Eesti-Text-Regular-Trial.otf */,
+				2F1133592DA6FCE400498D34 /* Localizable_UK.strings */,
+				2F1133642DA7011800498D34 /* Localizable_EN.strings */,
+				2F1133672DA7013F00498D34 /* Localizable_ES.strings */,
+				2F11336A2DA7015700498D34 /* Localizable_PL.strings */,
 			);
 			path = "Color Wheel";
 			sourceTree = "<group>";
@@ -137,9 +140,12 @@
 			knownRegions = (
 				en,
 				Base,
+				uk,
+				es,
+				pl,
 			);
 			mainGroup = 2F26A8832C5CDBE500889F30;
-			productRefGroup = 2F26A88D2C5CDBE500889F30 /* Products */;
+			productRefGroup = 2F26A8832C5CDBE500889F30;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -154,7 +160,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F8A40EE2DA6BA1400076D34 /* GT-Eesti-Text-Regular-Trial.otf in Resources */,
+				2F1133692DA7013F00498D34 /* Localizable_ES.strings in Resources */,
+				2F11335B2DA6FCE400498D34 /* Localizable_UK.strings in Resources */,
+				2F11336C2DA7015700498D34 /* Localizable_PL.strings in Resources */,
 				2F8A40EC2DA67A1C00076D34 /* GT-Eesti-Text-Thin-Trial.otf in Resources */,
+				2F1133662DA7011800498D34 /* Localizable_EN.strings in Resources */,
 				2F26A8992C5CDBE600889F30 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -177,6 +187,41 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		2F1133592DA6FCE400498D34 /* Localizable_UK.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2F11335A2DA6FCE400498D34 /* uk */,
+			);
+			name = Localizable_UK.strings;
+			sourceTree = "<group>";
+		};
+		2F1133642DA7011800498D34 /* Localizable_EN.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2F1133652DA7011800498D34 /* en */,
+			);
+			name = Localizable_EN.strings;
+			sourceTree = "<group>";
+		};
+		2F1133672DA7013F00498D34 /* Localizable_ES.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2F1133682DA7013F00498D34 /* es */,
+			);
+			name = Localizable_ES.strings;
+			sourceTree = "<group>";
+		};
+		2F11336A2DA7015700498D34 /* Localizable_PL.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2F11336B2DA7015700498D34 /* pl */,
+			);
+			name = Localizable_PL.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		2F26A89E2C5CDBE600889F30 /* Debug */ = {

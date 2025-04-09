@@ -193,7 +193,7 @@ final class WheelViewController: UIViewController {
         
         // Налаштування кнопки Hint
         hintButton.translatesAutoresizingMaskIntoConstraints = false
-        hintButton.setTitle("Hint", for: .normal)
+        hintButton.setTitle(NSLocalizedString("Hint", comment: ""), for: .normal)
         hintButton.addTarget(self, action: #selector(showHint), for: .touchUpInside)
         hintButton.setTitleColor(.white, for: .normal)
         hintButton.backgroundColor = UIColor(red: 74/255, green: 91/255, blue: 57/255, alpha: 1.0)
@@ -275,32 +275,48 @@ final class WheelViewController: UIViewController {
     }
     
     @objc func showHint() {
-        // Перевіряємо, чи вже відкритий попап
+        // Log the start of the method
+        print("showHint: Method called")
+        
+        // Check if the popup is already open
         if popupView.superview != nil {
+            print("showHint: Popup is already open")
             return
         }
         
-        // Створюємо нові екземпляри для кожного відкриття попапу
+        // Log the creation of new instances
+        print("showHint: Creating new popup and background views")
+        
+        // Create new instances for each popup opening
         let popupView = UIView()
         let backgroundView = UIView()
         let okButton = UIButton(type: .system)
         
-        // Налаштування головного pop-up вікна
+        // Log the setup of the main popup window
+        print("showHint: Setting up main popup window")
+        
+        // Main popup setup
         let popupWidth: CGFloat = 368
-        let popupHeight: CGFloat = 420
+        let popupHeight: CGFloat = 440 // Slightly increased height
         let screenWidth = view.frame.width
         let screenHeight = view.frame.height
         
-        // Розрахунок позиції для центрування попапу
+        // Calculate position for centering the popup
         let xPosition = (screenWidth - popupWidth) / 2
         let yPosition = (screenHeight - popupHeight) / 2
         
-        // Налаштування фону
+        // Log the background setup
+        print("showHint: Setting up background view")
+        
+        // Background setup
         backgroundView.frame = view.bounds
         backgroundView.backgroundColor = UIColor.black.withAlphaComponent(0.4)
         view.addSubview(backgroundView)
         
-        // Налаштування попапу
+        // Log the popup setup
+        print("showHint: Setting up popup view")
+        
+        // Popup setup
         popupView.frame = CGRect(x: xPosition, y: screenHeight, width: popupWidth, height: popupHeight)
         popupView.backgroundColor = .white
         popupView.layer.cornerRadius = 24
@@ -314,7 +330,10 @@ final class WheelViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(closePopup(_:)))
         backgroundView.addGestureRecognizer(tapGesture)
         
-        // Додаємо зображення з таббару
+        // Log the addition of the tab image view
+        print("showHint: Adding tab image view")
+        
+        // Add tab image from tab bar
         let tabImageView = UIImageView(frame: CGRect(x: 0, y: 20, width: popupWidth, height: 80))
         tabImageView.contentMode = .scaleAspectFit
         tabImageView.image = wheelType.tabItemImage
@@ -323,7 +342,10 @@ final class WheelViewController: UIViewController {
         tabImageView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         popupView.addSubview(tabImageView)
         
-        // Налаштування заголовка
+        // Log the title setup
+        print("showHint: Setting up title label")
+        
+        // Title setup
         let titleLabel = UILabel(frame: CGRect(x: 0, y: 110, width: popupWidth, height: 30))
         titleLabel.text = wheelType.tabItemTitle
         titleLabel.textAlignment = .center
@@ -335,9 +357,12 @@ final class WheelViewController: UIViewController {
         titleLabel.textColor = .darkGray
         popupView.addSubview(titleLabel)
         
-        // Додаємо текст підказки
-        let messageLabel = UILabel(frame: CGRect(x: 20, y: 150, width: popupWidth - 40, height: 0))
-        messageLabel.text = getHintText(for: wheelType)
+        // Log the hint text setup
+        print("showHint: Setting up hint text")
+        
+        // Add hint text
+        let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: popupWidth - 40, height: 0))
+        messageLabel.text = NSLocalizedString(getHintText(for: wheelType), comment: "")
         messageLabel.textAlignment = .center
         messageLabel.numberOfLines = 0
         if let customFont = UIFont(name: "GT-Eesti-Text-Regular-Trial", size: 16) {
@@ -347,19 +372,28 @@ final class WheelViewController: UIViewController {
         }
         messageLabel.textColor = .darkGray
         
-        // Розрахунок розміру тексту
+        // Calculate text size
         messageLabel.sizeToFit()
-        popupView.addSubview(messageLabel)
         
-        // Оновлюємо висоту попапу в залежності від розміру тексту
-        let newPopupHeight = messageLabel.frame.height + 250 // Додаємо простір для заголовка, футера та кнопки
-        popupView.frame.size.height = newPopupHeight
-        popupView.frame.origin.y = (screenHeight - newPopupHeight) / 2
+        // Log the scroll view setup
+        print("showHint: Setting up scroll view")
         
-        // Оновлюємо позицію кнопки OK
-        okButton.frame = CGRect(x: 20, y: newPopupHeight - 70, width: popupWidth - 40, height: 50)
+        // Set a fixed height for the scroll view inside the footer
+        let lineHeight: CGFloat = messageLabel.font.lineHeight
+        let footerHeight: CGFloat = lineHeight * 10 // Height for 10 lines of text
+        let scrollView = UIScrollView(frame: CGRect(x: 20, y: titleLabel.frame.maxY + 10, width: popupWidth - 40, height: popupHeight - titleLabel.frame.maxY - 10 - 75)) // Adjusted for 5-point spacing
+        scrollView.showsVerticalScrollIndicator = true
+        scrollView.contentSize = CGSize(width: popupWidth - 40, height: messageLabel.frame.height)
+        scrollView.addSubview(messageLabel)
+        popupView.addSubview(scrollView)
+        
+        // Log the OK button setup
+        print("showHint: Setting up OK button")
+        
+        // Update OK button position
+        okButton.frame = CGRect(x: 20, y: popupHeight - 70, width: popupWidth - 40, height: 50)
         okButton.center.x = popupView.frame.width / 2
-        okButton.setTitle("Ok. got it", for: .normal)
+        okButton.setTitle(NSLocalizedString("Ok. got it", comment: ""), for: .normal)
         okButton.setTitleColor(.white, for: .normal)
         okButton.backgroundColor = UIColor(red: 74/255, green: 91/255, blue: 57/255, alpha: 1.0)
         if let customFont = UIFont(name: "GT-Eesti-Text-Bold-Trial", size: 16) {
@@ -371,14 +405,33 @@ final class WheelViewController: UIViewController {
         okButton.addTarget(self, action: #selector(closePopup(_:)), for: .touchUpInside)
         popupView.addSubview(okButton)
         
-        // Зберігаємо посилання на view для закриття
+        // Store references for closing
         self.popupView = popupView
         self.backgroundView = backgroundView
         
-        // Анімація появи попапу
-        UIView.animate(withDuration: 0.3) {
+        // Bring views to the front
+        view.bringSubviewToFront(backgroundView)
+        view.bringSubviewToFront(popupView)
+        
+        // Log the initial and final positions
+        print("Initial Y Position: \(screenHeight)")
+        print("Final Y Position: \(yPosition)")
+
+        // Animate the popup to move upwards to its final position
+        UIView.animate(withDuration: 0.3, animations: {
             popupView.frame.origin.y = yPosition
-        }
+            print("Animating to Y Position: \(yPosition)")
+        }, completion: { _ in
+            // Log the final frame and visibility
+            print("showHint: Popup final frame: \(popupView.frame)")
+            print("showHint: Popup is visible: \(!popupView.isHidden)")
+            print("showHint: Background is visible: \(!backgroundView.isHidden)")
+            
+            // Log the size and position of subviews
+            print("showHint: Message label frame: \(messageLabel.frame)")
+            print("showHint: Scroll view frame: \(scrollView.frame)")
+            print("showHint: OK button frame: \(okButton.frame)")
+        })
     }
     
     private func getHintText(for wheelType: WheelType) -> String {
@@ -423,32 +476,32 @@ final class WheelViewController: UIViewController {
     }
     
     @objc func showInfo() {
-        // Перевіряємо, чи вже відкритий попап
+        // Check if the popup is already open
         if popupView.superview != nil {
             return
         }
         
-        // Створюємо нові екземпляри для кожного відкриття попапу
+        // Create new instances for each popup opening
         let popupView = UIView()
         let backgroundView = UIView()
         let okButton = UIButton(type: .system)
         
-        // Налаштування головного pop-up вікна
+        // Main popup setup
         let popupWidth: CGFloat = 368
-        let popupHeight: CGFloat = 420
+        let popupHeight: CGFloat = 500
         let screenWidth = view.frame.width
         let screenHeight = view.frame.height
         
-        // Розрахунок позиції для центрування попапу
+        // Calculate position for centering the popup
         let xPosition = (screenWidth - popupWidth) / 2
         let yPosition = (screenHeight - popupHeight) / 2
         
-        // Налаштування фону
+        // Background setup
         backgroundView.frame = view.bounds
         backgroundView.backgroundColor = UIColor.black.withAlphaComponent(0.4)
         view.addSubview(backgroundView)
         
-        // Налаштування попапу
+        // Popup setup
         popupView.frame = CGRect(x: xPosition, y: screenHeight, width: popupWidth, height: popupHeight)
         popupView.backgroundColor = .white
         popupView.layer.cornerRadius = 24
@@ -462,7 +515,7 @@ final class WheelViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(closeInfoPopup(_:)))
         backgroundView.addGestureRecognizer(tapGesture)
         
-        // Додаємо іконку Info
+        // Add Info icon
         let infoImageView = UIImageView(frame: CGRect(x: 0, y: 20, width: popupWidth, height: 80))
         infoImageView.contentMode = .scaleAspectFit
         infoImageView.image = UIImage(systemName: "info.circle.fill")
@@ -472,9 +525,9 @@ final class WheelViewController: UIViewController {
         infoImageView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         popupView.addSubview(infoImageView)
         
-        // Налаштування заголовка
+        // Title setup
         let titleLabel = UILabel(frame: CGRect(x: 0, y: 110, width: popupWidth, height: 30))
-        titleLabel.text = "About Color Wheel"
+        titleLabel.text = NSLocalizedString("About Color Wheel", comment: "")
         titleLabel.textAlignment = .center
         if let customFont = UIFont(name: "GT-Eesti-Text-Bold-Trial", size: 14) {
             titleLabel.font = customFont
@@ -484,13 +537,13 @@ final class WheelViewController: UIViewController {
         titleLabel.textColor = .darkGray
         popupView.addSubview(titleLabel)
         
-        // Додаємо текст інформації
+        // Add Info text
         let scrollView = UIScrollView(frame: CGRect(x: 20, y: 150, width: popupWidth - 40, height: 180))
         scrollView.showsVerticalScrollIndicator = true
         popupView.addSubview(scrollView)
         
         let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: popupWidth - 40, height: 0))
-        messageLabel.text = "Color Wheel is your perfect companion for creating stylish looks! Simply spin the wheel, choose your favorite color combination, and use it to style your outfit. The wheel helps you find harmonious color combinations for any style: from casual to evening wear. Experiment with different combinations to create a unique and expressive look!"
+        messageLabel.text = NSLocalizedString("Color Wheel is your perfect companion for creating stylish looks! Simply spin the wheel, choose your favorite color combination, and use it to style your outfit. The wheel helps you find harmonious color combinations for any style: from casual to evening wear. Experiment with different combinations to create a unique and expressive look!", comment: "")
         messageLabel.textAlignment = .center
         messageLabel.numberOfLines = 0
         if let customFont = UIFont(name: "GT-Eesti-Text-Regular-Trial", size: 16) {
@@ -500,14 +553,14 @@ final class WheelViewController: UIViewController {
         }
         messageLabel.textColor = .darkGray
         
-        // Розрахунок розміру тексту
+        // Calculate text size
         messageLabel.sizeToFit()
         scrollView.contentSize = CGSize(width: popupWidth - 40, height: messageLabel.frame.height)
         scrollView.addSubview(messageLabel)
         
-        // Налаштування кнопки OK
+        // OK button setup
         okButton.frame = CGRect(x: 20, y: popupHeight - 60, width: popupWidth - 40, height: 50)
-        okButton.setTitle("Let's try", for: .normal)
+        okButton.setTitle(NSLocalizedString("Let's try", comment: ""), for: .normal)
         okButton.setTitleColor(.white, for: .normal)
         okButton.backgroundColor = UIColor(red: 74/255, green: 91/255, blue: 57/255, alpha: 1.0)
         if let customFont = UIFont(name: "GT-Eesti-Text-Bold-Trial", size: 16) {
@@ -519,11 +572,11 @@ final class WheelViewController: UIViewController {
         okButton.addTarget(self, action: #selector(closeInfoPopup(_:)), for: .touchUpInside)
         popupView.addSubview(okButton)
         
-        // Зберігаємо посилання на view для закриття
+        // Store references for closing
         self.popupView = popupView
         self.backgroundView = backgroundView
         
-        // Анімація появи попапу
+        // Animate the popup to move upwards to its final position
         UIView.animate(withDuration: 0.3) {
             popupView.frame.origin.y = yPosition
         }
