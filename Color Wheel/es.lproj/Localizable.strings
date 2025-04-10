@@ -1,0 +1,37 @@
+/* Common UI Elements */
+"Hint" = "Sugerencia";
+"Ok. got it" = "Entendido";
+"Let's try" = "Vamos a probar";
+"About Color Wheel" = "Sobre la Rueda de Colores";
+
+/* Info Text */
+"Color Wheel is your perfect companion for creating stylish looks!" = "¡La Rueda de Colores es tu compañero perfecto para crear looks elegantes!";
+
+/* Color Scheme Names */
+"Analogous scheme" = "Esquema análogo";
+"Complementary scheme" = "Esquema complementario";
+"Triadic scheme" = "Esquema triádico";
+"Tetradic scheme" = "Esquema tetrádico";
+"Split Complementary scheme" = "Esquema complementario dividido";
+
+/* Color Scheme Descriptions */
+"Analogous color scheme consists of colors that are adjacent to each other on the color wheel. These colors create a harmonious and cohesive look. Perfect for creating a unified and soothing design. Great for backgrounds, nature-inspired designs, and when you want to convey a sense of harmony and tranquility. Try using these combinations for interior design, fashion, or creating a calming atmosphere in your artwork." = "El esquema de colores análogos consiste en colores que están adyacentes entre sí en la rueda de colores. Estos colores crean una apariencia armoniosa y cohesiva. Perfecto para crear un diseño unificado y relajante. Excelente para fondos, diseños inspirados en la naturaleza y cuando quieres transmitir una sensación de armonía y tranquilidad. Prueba usar estas combinaciones para diseño de interiores, moda o crear una atmósfera relajante en tu obra de arte.";
+
+"Complementary color scheme uses colors that are opposite each other on the color wheel. This creates a high contrast and vibrant look. The strong contrast makes both colors appear more intense and creates a dynamic visual impact. Ideal for creating bold statements, highlighting important elements, or adding energy to your design. Perfect for call-to-action buttons, sports branding, or when you want to create a dramatic effect in your artwork." = "El esquema de colores complementarios utiliza colores que están opuestos entre sí en la rueda de colores. Esto crea una apariencia de alto contraste y vibrante. El fuerte contraste hace que ambos colores parezcan más intensos y crea un impacto visual dinámico. Ideal para crear declaraciones audaces, resaltar elementos importantes o agregar energía a tu diseño. Perfecto para botones de llamada a la acción, branding deportivo o cuando quieres crear un efecto dramático en tu obra de arte.";
+
+"Triadic color scheme uses three colors that are evenly spaced around the color wheel. This creates a balanced and dynamic look. The three colors form a triangle on the color wheel, offering a rich and diverse palette while maintaining harmony. Great for creating vibrant and energetic designs. Perfect for children's products, playful branding, or when you want to create a fun and lively atmosphere. Try using one color as the dominant shade and the others as accents." = "El esquema de colores triádico utiliza tres colores que están espaciados uniformemente alrededor de la rueda de colores. Esto crea una apariencia equilibrada y dinámica. Los tres colores forman un triángulo en la rueda de colores, ofreciendo una paleta rica y diversa mientras mantiene la armonía. Excelente para crear diseños vibrantes y enérgicos. Perfecto para productos infantiles, branding lúdico o cuando quieres crear una atmósfera divertida y animada. Prueba usar un color como tono dominante y los otros como acentos.";
+
+"Tetradic color scheme uses four colors that form a rectangle on the color wheel. This creates a rich and complex color palette. The four colors offer endless possibilities for creating sophisticated and layered designs. Excellent for creating depth and visual interest in your work. Perfect for complex designs, detailed illustrations, or when you want to create a rich and luxurious feel. Remember to balance the colors by using one as the dominant shade and the others as supporting elements." = "El esquema de colores tetrádico utiliza cuatro colores que forman un rectángulo en la rueda de colores. Esto crea una paleta de colores rica y compleja. Los cuatro colores ofrecen infinitas posibilidades para crear diseños sofisticados y en capas. Excelente para crear profundidad e interés visual en tu trabajo. Perfecto para diseños complejos, ilustraciones detalladas o cuando quieres crear una sensación rica y lujosa. Recuerda equilibrar los colores usando uno como tono dominante y los otros como elementos de apoyo.";
+
+"Split-Complementary color scheme uses a base color and two colors adjacent to its complement. This creates a high contrast look while being more versatile than a complementary scheme. The combination offers the energy of complementary colors with more flexibility and harmony. Great for creating dynamic designs that aren't too overwhelming. Perfect for modern branding, web design, or when you want to create an energetic yet balanced composition. Try using the base color as your primary shade and the split-complements as accents." = "El esquema de colores complementario dividido utiliza un color base y dos colores adyacentes a su complemento. Esto crea una apariencia de alto contraste mientras es más versátil que un esquema complementario. La combinación ofrece la energía de los colores complementarios con más flexibilidad y armonía. Excelente para crear diseños dinámicos que no son demasiado abrumadores. Perfecto para branding moderno, diseño web o cuando quieres crear una composición enérgica pero equilibrada. Prueba usar el color base como tono principal y los complementos divididos como acentos.";
+
+/* Tab Names */
+"tab1" = "Análogo";
+"tab2" = "Complementario";
+"tab3" = "Triádico";
+"tab4" = "Tetrádico";
+"tab5" = "Complementario dividido";
+
+/* Info Popup Text */
+"info_popup_title" = "Sobre la Rueda de Colores";
+"info_popup_message" = "¡La Rueda de Colores es tu compañero perfecto para crear looks elegantes! Con nuestra aplicación, puedes explorar varios esquemas de colores, aprender sobre teoría del color y crear hermosas combinaciones de colores para tus proyectos. Ya seas diseñador, artista o simplemente alguien que ama los colores, la Rueda de Colores te ayudará a descubrir la paleta perfecta para cualquier ocasión."; 

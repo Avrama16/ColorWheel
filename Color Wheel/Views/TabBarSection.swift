@@ -18,15 +18,15 @@ enum WheelType: Int {
     func tabTitle() -> String {
         switch self {
         case .tab1:
-            return "Complementary color scheme"
+            return NSLocalizedString("Complementary scheme", comment: "Title for Complementary color scheme")
         case .tab2:
-            return "Triadic color scheme"
+            return NSLocalizedString("Triadic scheme", comment: "Title for Triadic color scheme")
         case .tab3:
-            return "Analogous color scheme"
+            return NSLocalizedString("Analogous scheme", comment: "Title for Analogous color scheme")
         case .tab4:
-            return "Split-Complementary color scheme"
+            return NSLocalizedString("Split Complementary scheme", comment: "Title for Split-Complementary color scheme")
         case .tab5:
-            return "Tetradic color scheme"
+            return NSLocalizedString("Tetradic scheme", comment: "Title for Tetradic color scheme")
         }
     }
 }

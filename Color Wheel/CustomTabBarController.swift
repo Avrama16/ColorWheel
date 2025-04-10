@@ -90,26 +90,3 @@ class CustomTabBarController: UITabBarController, UITabBarControllerDelegate {
         return navigationController
     }
 }
-
-extension WheelType {
-    
-    var tabItemTitle: String {
-        switch self {
-        case .type2: return "Complementary color scheme"
-        case .type3: return "Triadic color scheme"
-        case .type1: return "Analogous color scheme"
-        case .type5: return "Split-Complementary color scheme"
-        case .type4: return "Tetradic color scheme"
-        }
-    }
-    
-    var tabItemImage: UIImage? {
-        return switch self {
-        case .type2: UIImage.compBar
-        case .type3: UIImage.triadBar
-        case .type1: UIImage.analogBar
-        case .type5: UIImage.splitCompBar
-        case .type4: UIImage.tetradBar
-        }
-    }
-}

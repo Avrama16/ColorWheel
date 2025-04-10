@@ -1,0 +1,37 @@
+/* Common UI Elements */
+"Hint" = "Підказка";
+"Ok. got it" = "Зрозуміло";
+"Let's try" = "Спробуємо";
+"About Color Wheel" = "Про Колесо Кольорів";
+
+/* Info Text */
+"Color Wheel is your perfect companion for creating stylish looks!" = "Колесо Кольорів - ваш ідеальний помічник у створенні стильних образів!";
+
+/* Color Scheme Names */
+"Analogous scheme" = "Аналогова схема";
+"Complementary scheme" = "Комплементарна схема";
+"Triadic scheme" = "Тріадна схема";
+"Tetradic scheme" = "Тетрадна схема";
+"Split Complementary scheme" = "Роздільно-комплементарна схема";
+
+/* Color Scheme Descriptions */
+"Analogous color scheme consists of colors that are adjacent to each other on the color wheel. These colors create a harmonious and cohesive look. Perfect for creating a unified and soothing design. Great for backgrounds, nature-inspired designs, and when you want to convey a sense of harmony and tranquility. Try using these combinations for interior design, fashion, or creating a calming atmosphere in your artwork." = "Аналогова схема складається з кольорів, які знаходяться поруч один з одним на колірному колі. Ці кольори створюють гармонійний та цілісний вигляд. Ідеально підходить для створення єдиного та заспокійливого дизайну. Чудово підходить для фонів, дизайну натхненного природою, та коли ви хочете передати відчуття гармонії та спокою. Спробуйте використовувати ці комбінації для дизайну інтер'єру, моди або створення заспокійливої атмосфери у вашому мистецтві.";
+
+"Complementary color scheme uses colors that are opposite each other on the color wheel. This creates a high contrast and vibrant look. The strong contrast makes both colors appear more intense and creates a dynamic visual impact. Ideal for creating bold statements, highlighting important elements, or adding energy to your design. Perfect for call-to-action buttons, sports branding, or when you want to create a dramatic effect in your artwork." = "Комплементарна схема використовує кольори, які знаходяться один навпроти одного на колірному колі. Це створює високий контраст та яскравий вигляд. Сильний контраст робить обидва кольори більш інтенсивними та створює динамічний візуальний ефект. Ідеально підходить для створення сміливих заяв, виділення важливих елементів або додавання енергії до вашого дизайну. Чудово підходить для кнопок заклику до дії, спортивного брендингу або коли ви хочете створити драматичний ефект у вашому мистецтві.";
+
+"Triadic color scheme uses three colors that are evenly spaced around the color wheel. This creates a balanced and dynamic look. The three colors form a triangle on the color wheel, offering a rich and diverse palette while maintaining harmony. Great for creating vibrant and energetic designs. Perfect for children's products, playful branding, or when you want to create a fun and lively atmosphere. Try using one color as the dominant shade and the others as accents." = "Тріадна схема використовує три кольори, які рівномірно розташовані навколо колірного кола. Це створює збалансований та динамічний вигляд. Три кольори утворюють трикутник на колірному колі, пропонуючи багату та різноманітну палітру при збереженні гармонії. Чудово підходить для створення яскравих та енергійних дизайнів. Ідеально підходить для дитячих продуктів, ігрового брендингу або коли ви хочете створити веселу та жваву атмосферу. Спробуйте використовувати один колір як домінуючий відтінок, а інші як акценти.";
+
+"Tetradic color scheme uses four colors that form a rectangle on the color wheel. This creates a rich and complex color palette. The four colors offer endless possibilities for creating sophisticated and layered designs. Excellent for creating depth and visual interest in your work. Perfect for complex designs, detailed illustrations, or when you want to create a rich and luxurious feel. Remember to balance the colors by using one as the dominant shade and the others as supporting elements." = "Тетрадна схема використовує чотири кольори, які утворюють прямокутник на колірному колі. Це створює багату та складну колірну палітру. Чотири кольори пропонують безкінечні можливості для створення витончених та багатошарових дизайнів. Чудово підходить для створення глибини та візуального інтересу у вашій роботі. Ідеально підходить для складних дизайнів, детальних ілюстрацій або коли ви хочете створити багатий та розкішний відчуття. Пам'ятайте про баланс кольорів, використовуючи один як домінуючий відтінок, а інші як підтримуючі елементи.";
+
+"Split-Complementary color scheme uses a base color and two colors adjacent to its complement. This creates a high contrast look while being more versatile than a complementary scheme. The combination offers the energy of complementary colors with more flexibility and harmony. Great for creating dynamic designs that aren't too overwhelming. Perfect for modern branding, web design, or when you want to create an energetic yet balanced composition. Try using the base color as your primary shade and the split-complements as accents." = "Роздільно-комплементарна схема використовує базовий колір та два кольори, що знаходяться поруч з його комплементом. Це створює високий контрастний вигляд, будучи більш універсальним, ніж комплементарна схема. Комбінація пропонує енергію комплементарних кольорів з більшою гнучкістю та гармонією. Чудово підходить для створення динамічних дизайнів, які не є надто перевантаженими. Ідеально підходить для сучасного брендингу, веб-дизайну або коли ви хочете створити енергійну, але збалансовану композицію. Спробуйте використовувати базовий колір як основний відтінок, а розщеплені комплементи як акценти.";
+
+/* Tab Names */
+"tab1" = "Аналогова";
+"tab2" = "Комплементарна";
+"tab3" = "Тріадна";
+"tab4" = "Тетрадна";
+"tab5" = "Розщеплена комплементарна";
+
+/* Info Popup Text */
+"info_popup_title" = "Про Колесо Кольорів";
+"info_popup_message" = "Колесо Кольорів - ваш ідеальний помічник у створенні стильних образів! З нашим додатком ви можете досліджувати різні колірні схеми, вивчати теорію кольорів та створювати красиві колірні комбінації для ваших проектів. Незалежно від того, чи ви дизайнер, художник або просто любитель кольорів, Колесо Кольорів допоможе вам знайти ідеальну палітру для будь-якої нагоди."; 

@@ -45,12 +45,38 @@ extension StaticWheelType {
     }
 }
 
+extension WheelType {
+    var tabItemTitle: String {
+        switch self {
+        case .type1:
+            return NSLocalizedString("Analogous scheme", comment: "Title for Analogous color scheme")
+        case .type2:
+            return NSLocalizedString("Complementary scheme", comment: "Title for Complementary color scheme")
+        case .type3:
+            return NSLocalizedString("Triadic scheme", comment: "Title for Triadic color scheme")
+        case .type4:
+            return NSLocalizedString("Tetradic scheme", comment: "Title for Tetradic color scheme")
+        case .type5:
+            return NSLocalizedString("Split Complementary scheme", comment: "Title for Split-Complementary color scheme")
+        }
+    }
+    
+    var tabItemImage: UIImage? {
+        return switch self {
+        case .type2: UIImage.compBar
+        case .type3: UIImage.triadBar
+        case .type1: UIImage.analogBar
+        case .type5: UIImage.splitCompBar
+        case .type4: UIImage.tetradBar
+        }
+    }
+}
+
 final class WheelViewController: UIViewController {
     
     var currentWheelState: StaticWheelType = .type1 {
         didSet {
             staticWheel.image = currentWheelState.staticWheelType
-            print("WheelViewController: Updated static wheel type to \(currentWheelState)")
         }
     }
     
@@ -72,7 +98,6 @@ final class WheelViewController: UIViewController {
     var backgroundView = UIView()
     
     init(wheelType: WheelType) {
-        print("WheelViewController: Initializing with wheelType: \(wheelType)")
         self.wheelType = wheelType
         rotatingWheel = .init(wheelType: wheelType)
         titleLabel.text = wheelType.tabItemTitle
@@ -82,9 +107,6 @@ final class WheelViewController: UIViewController {
         // Завантажуємо збережений стан
         if let tabBarController = self.tabBarController as? CustomTabBarController {
             self.currentWheelState = tabBarController.currentStaticWheelType
-            print("WheelViewController: Loaded saved state: \(self.currentWheelState)")
-        } else {
-            print("WheelViewController: No tabBarController found during initialization")
         }
     }
     
@@ -94,7 +116,6 @@ final class WheelViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("WheelViewController: viewDidLoad called")
         
         // Приховуємо стандартний навігаційний бар
         navigationController?.setNavigationBarHidden(true, animated: false)
@@ -111,8 +132,6 @@ final class WheelViewController: UIViewController {
             name: .staticWheelTypeDidChange,
             object: nil
         )
-        
-        print("WheelViewController: viewDidLoad completed")
     }
     
     private func setupCustomNavigationBar() {
@@ -275,29 +294,19 @@ final class WheelViewController: UIViewController {
     }
     
     @objc func showHint() {
-        // Log the start of the method
-        print("showHint: Method called")
-        
         // Check if the popup is already open
         if popupView.superview != nil {
-            print("showHint: Popup is already open")
             return
         }
-        
-        // Log the creation of new instances
-        print("showHint: Creating new popup and background views")
         
         // Create new instances for each popup opening
         let popupView = UIView()
         let backgroundView = UIView()
         let okButton = UIButton(type: .system)
         
-        // Log the setup of the main popup window
-        print("showHint: Setting up main popup window")
-        
         // Main popup setup
         let popupWidth: CGFloat = 368
-        let popupHeight: CGFloat = 440 // Slightly increased height
+        let popupHeight: CGFloat = 480
         let screenWidth = view.frame.width
         let screenHeight = view.frame.height
         
@@ -305,16 +314,10 @@ final class WheelViewController: UIViewController {
         let xPosition = (screenWidth - popupWidth) / 2
         let yPosition = (screenHeight - popupHeight) / 2
         
-        // Log the background setup
-        print("showHint: Setting up background view")
-        
         // Background setup
         backgroundView.frame = view.bounds
         backgroundView.backgroundColor = UIColor.black.withAlphaComponent(0.4)
         view.addSubview(backgroundView)
-        
-        // Log the popup setup
-        print("showHint: Setting up popup view")
         
         // Popup setup
         popupView.frame = CGRect(x: xPosition, y: screenHeight, width: popupWidth, height: popupHeight)
@@ -330,9 +333,6 @@ final class WheelViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(closePopup(_:)))
         backgroundView.addGestureRecognizer(tapGesture)
         
-        // Log the addition of the tab image view
-        print("showHint: Adding tab image view")
-        
         // Add tab image from tab bar
         let tabImageView = UIImageView(frame: CGRect(x: 0, y: 20, width: popupWidth, height: 80))
         tabImageView.contentMode = .scaleAspectFit
@@ -341,9 +341,6 @@ final class WheelViewController: UIViewController {
         tabImageView.layer.cornerRadius = 24
         tabImageView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         popupView.addSubview(tabImageView)
-        
-        // Log the title setup
-        print("showHint: Setting up title label")
         
         // Title setup
         let titleLabel = UILabel(frame: CGRect(x: 0, y: 110, width: popupWidth, height: 30))
@@ -357,12 +354,9 @@ final class WheelViewController: UIViewController {
         titleLabel.textColor = .darkGray
         popupView.addSubview(titleLabel)
         
-        // Log the hint text setup
-        print("showHint: Setting up hint text")
-        
         // Add hint text
         let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: popupWidth - 40, height: 0))
-        messageLabel.text = NSLocalizedString(getHintText(for: wheelType), comment: "")
+        messageLabel.text = getHintText(for: wheelType)
         messageLabel.textAlignment = .center
         messageLabel.numberOfLines = 0
         if let customFont = UIFont(name: "GT-Eesti-Text-Regular-Trial", size: 16) {
@@ -375,20 +369,16 @@ final class WheelViewController: UIViewController {
         // Calculate text size
         messageLabel.sizeToFit()
         
-        // Log the scroll view setup
-        print("showHint: Setting up scroll view")
-        
         // Set a fixed height for the scroll view inside the footer
         let lineHeight: CGFloat = messageLabel.font.lineHeight
-        let footerHeight: CGFloat = lineHeight * 10 // Height for 10 lines of text
-        let scrollView = UIScrollView(frame: CGRect(x: 20, y: titleLabel.frame.maxY + 10, width: popupWidth - 40, height: popupHeight - titleLabel.frame.maxY - 10 - 75)) // Adjusted for 5-point spacing
+        let footerHeight: CGFloat = lineHeight * 8.5
+        let spacing: CGFloat = 20
+        let scrollView = UIScrollView(frame: CGRect(x: 20, y: titleLabel.frame.maxY + spacing, width: popupWidth - 40, height: popupHeight - titleLabel.frame.maxY - spacing * 3 - 70))
         scrollView.showsVerticalScrollIndicator = true
         scrollView.contentSize = CGSize(width: popupWidth - 40, height: messageLabel.frame.height)
+        messageLabel.frame.origin = .zero
         scrollView.addSubview(messageLabel)
         popupView.addSubview(scrollView)
-        
-        // Log the OK button setup
-        print("showHint: Setting up OK button")
         
         // Update OK button position
         okButton.frame = CGRect(x: 20, y: popupHeight - 70, width: popupWidth - 40, height: 50)
@@ -413,39 +403,24 @@ final class WheelViewController: UIViewController {
         view.bringSubviewToFront(backgroundView)
         view.bringSubviewToFront(popupView)
         
-        // Log the initial and final positions
-        print("Initial Y Position: \(screenHeight)")
-        print("Final Y Position: \(yPosition)")
-
         // Animate the popup to move upwards to its final position
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: 0.3) {
             popupView.frame.origin.y = yPosition
-            print("Animating to Y Position: \(yPosition)")
-        }, completion: { _ in
-            // Log the final frame and visibility
-            print("showHint: Popup final frame: \(popupView.frame)")
-            print("showHint: Popup is visible: \(!popupView.isHidden)")
-            print("showHint: Background is visible: \(!backgroundView.isHidden)")
-            
-            // Log the size and position of subviews
-            print("showHint: Message label frame: \(messageLabel.frame)")
-            print("showHint: Scroll view frame: \(scrollView.frame)")
-            print("showHint: OK button frame: \(okButton.frame)")
-        })
+        }
     }
     
     private func getHintText(for wheelType: WheelType) -> String {
         switch wheelType {
         case .type1:
-            return "Analogous color scheme consists of colors that are adjacent to each other on the color wheel. These colors create a harmonious and cohesive look. Perfect for creating a unified and soothing design. Great for backgrounds, nature-inspired designs, and when you want to convey a sense of harmony and tranquility. Try using these combinations for interior design, fashion, or creating a calming atmosphere in your artwork."
+            return NSLocalizedString("Analogous color scheme consists of colors that are adjacent to each other on the color wheel. These colors create a harmonious and cohesive look. Perfect for creating a unified and soothing design. Great for backgrounds, nature-inspired designs, and when you want to convey a sense of harmony and tranquility. Try using these combinations for interior design, fashion, or creating a calming atmosphere in your artwork.", comment: "")
         case .type2:
-            return "Complementary color scheme uses colors that are opposite each other on the color wheel. This creates a high contrast and vibrant look. The strong contrast makes both colors appear more intense and creates a dynamic visual impact. Ideal for creating bold statements, highlighting important elements, or adding energy to your design. Perfect for call-to-action buttons, sports branding, or when you want to create a dramatic effect in your artwork."
+            return NSLocalizedString("Complementary color scheme uses colors that are opposite each other on the color wheel. This creates a high contrast and vibrant look. The strong contrast makes both colors appear more intense and creates a dynamic visual impact. Ideal for creating bold statements, highlighting important elements, or adding energy to your design. Perfect for call-to-action buttons, sports branding, or when you want to create a dramatic effect in your artwork.", comment: "")
         case .type3:
-            return "Triadic color scheme uses three colors that are evenly spaced around the color wheel. This creates a balanced and dynamic look. The three colors form a triangle on the color wheel, offering a rich and diverse palette while maintaining harmony. Great for creating vibrant and energetic designs. Perfect for children's products, playful branding, or when you want to create a fun and lively atmosphere. Try using one color as the dominant shade and the others as accents."
+            return NSLocalizedString("Triadic color scheme uses three colors that are evenly spaced around the color wheel. This creates a balanced and dynamic look. The three colors form a triangle on the color wheel, offering a rich and diverse palette while maintaining harmony. Great for creating vibrant and energetic designs. Perfect for children's products, playful branding, or when you want to create a fun and lively atmosphere. Try using one color as the dominant shade and the others as accents.", comment: "")
         case .type4:
-            return "Tetradic color scheme uses four colors that form a rectangle on the color wheel. This creates a rich and complex color palette. The four colors offer endless possibilities for creating sophisticated and layered designs. Excellent for creating depth and visual interest in your work. Perfect for complex designs, detailed illustrations, or when you want to create a rich and luxurious feel. Remember to balance the colors by using one as the dominant shade and the others as supporting elements."
+            return NSLocalizedString("Tetradic color scheme uses four colors that form a rectangle on the color wheel. This creates a rich and complex color palette. The four colors offer endless possibilities for creating sophisticated and layered designs. Excellent for creating depth and visual interest in your work. Perfect for complex designs, detailed illustrations, or when you want to create a rich and luxurious feel. Remember to balance the colors by using one as the dominant shade and the others as supporting elements.", comment: "")
         case .type5:
-            return "Split-Complementary color scheme uses a base color and two colors adjacent to its complement. This creates a high contrast look while being more versatile than a complementary scheme. The combination offers the energy of complementary colors with more flexibility and harmony. Great for creating dynamic designs that aren't too overwhelming. Perfect for modern branding, web design, or when you want to create an energetic yet balanced composition. Try using the base color as your primary shade and the split-complements as accents."
+            return NSLocalizedString("Split-Complementary color scheme uses a base color and two colors adjacent to its complement. This creates a high contrast look while being more versatile than a complementary scheme. The combination offers the energy of complementary colors with more flexibility and harmony. Great for creating dynamic designs that aren't too overwhelming. Perfect for modern branding, web design, or when you want to create an energetic yet balanced composition. Try using the base color as your primary shade and the split-complements as accents.", comment: "")
         }
     }
     
@@ -527,7 +502,7 @@ final class WheelViewController: UIViewController {
         
         // Title setup
         let titleLabel = UILabel(frame: CGRect(x: 0, y: 110, width: popupWidth, height: 30))
-        titleLabel.text = NSLocalizedString("About Color Wheel", comment: "")
+        titleLabel.text = NSLocalizedString("info_popup_title", comment: "")
         titleLabel.textAlignment = .center
         if let customFont = UIFont(name: "GT-Eesti-Text-Bold-Trial", size: 14) {
             titleLabel.font = customFont
@@ -538,12 +513,12 @@ final class WheelViewController: UIViewController {
         popupView.addSubview(titleLabel)
         
         // Add Info text
-        let scrollView = UIScrollView(frame: CGRect(x: 20, y: 150, width: popupWidth - 40, height: 180))
+        let scrollView = UIScrollView(frame: CGRect(x: 20, y: titleLabel.frame.maxY + 40, width: popupWidth - 40, height: popupHeight - titleLabel.frame.maxY - 40 - 40 - 60))
         scrollView.showsVerticalScrollIndicator = true
         popupView.addSubview(scrollView)
         
         let messageLabel = UILabel(frame: CGRect(x: 0, y: 0, width: popupWidth - 40, height: 0))
-        messageLabel.text = NSLocalizedString("Color Wheel is your perfect companion for creating stylish looks! Simply spin the wheel, choose your favorite color combination, and use it to style your outfit. The wheel helps you find harmonious color combinations for any style: from casual to evening wear. Experiment with different combinations to create a unique and expressive look!", comment: "")
+        messageLabel.text = NSLocalizedString("info_popup_message", comment: "")
         messageLabel.textAlignment = .center
         messageLabel.numberOfLines = 0
         if let customFont = UIFont(name: "GT-Eesti-Text-Regular-Trial", size: 16) {
@@ -600,38 +575,28 @@ final class WheelViewController: UIViewController {
     }
     
     private func rotateWheel(to angle: CGFloat) {
-        print("WheelViewController: Rotating wheel to angle: \(angle)")
-        
         // Визначаємо найближчий кут секції
-        let numberOfSections = 12 // Фіксована кількість секцій для всіх типів колеса
+        let numberOfSections = 12
         let sectionAngle = 2 * .pi / CGFloat(numberOfSections)
         let nearestSection = round(angle / sectionAngle) * sectionAngle
         
         // Визначаємо тривалість анімації на основі кута повороту
-        let baseDuration = 0.2 // Зменшуємо базову тривалість для швидшої анімації
+        let baseDuration = 0.2
         let angleRatio = min(abs(angle - nearestSection) / sectionAngle, 1.0)
-        let duration = baseDuration * (0.5 + 0.5 * angleRatio) // Мінімум 0.1с, максимум 0.2с
+        let duration = baseDuration * (0.5 + 0.5 * angleRatio)
         
-        print("WheelViewController: Starting rotation animation with duration: \(duration)")
         UIView.animate(
             withDuration: duration,
             delay: 0,
             options: [.curveEaseOut],
             animations: {
                 self.rotatingWheel.transform = CGAffineTransform(rotationAngle: nearestSection)
-            },
-            completion: { _ in
-                print("WheelViewController: Rotation animation completed")
             }
         )
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        print("WheelViewController: viewDidAppear called")
-        print("WheelViewController: view frame: \(view.frame)")
-        print("WheelViewController: staticWheel frame: \(staticWheel.frame)")
-        print("WheelViewController: rotatingWheel frame: \(rotatingWheel.frame)")
     }
     
     override func viewWillDisappear(_ animated: Bool) {
