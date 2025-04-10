@@ -22,6 +22,7 @@ class CustomTabBarController: UITabBarController, UITabBarControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("CustomTabBarController: viewDidLoad called")
         self.delegate = self
         
         // Налаштування стилю таббару
@@ -42,6 +43,7 @@ class CustomTabBarController: UITabBarController, UITabBarControllerDelegate {
         ])
         
         setupViewControllers()
+        print("CustomTabBarController: setupViewControllers completed")
     }
     
     // Метод для оновлення всіх WheelViewController
@@ -64,6 +66,7 @@ class CustomTabBarController: UITabBarController, UITabBarControllerDelegate {
     }
     
     private func setupViewControllers() {
+        print("CustomTabBarController: Setting up view controllers")
         let viewControllers = [
             createViewController(for: .type2),
             createViewController(for: .type3),
@@ -73,9 +76,11 @@ class CustomTabBarController: UITabBarController, UITabBarControllerDelegate {
         ]
         
         setViewControllers(viewControllers, animated: false)
+        print("CustomTabBarController: View controllers set: \(viewControllers.count)")
     }
     
     private func createViewController(for wheelType: WheelType) -> UIViewController {
+        print("CustomTabBarController: Creating view controller for wheelType: \(wheelType)")
         let viewController = WheelViewController(wheelType: wheelType)
         let navigationController = UINavigationController(rootViewController: viewController)
         navigationController.navigationBar.tintColor = .black
