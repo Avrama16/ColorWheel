@@ -7,10 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2F11335B2DA6FCE400498D34 /* Localizable_UK.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2F1133592DA6FCE400498D34 /* Localizable_UK.strings */; };
-		2F1133662DA7011800498D34 /* Localizable_EN.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2F1133642DA7011800498D34 /* Localizable_EN.strings */; };
-		2F1133692DA7013F00498D34 /* Localizable_ES.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2F1133672DA7013F00498D34 /* Localizable_ES.strings */; };
-		2F11336C2DA7015700498D34 /* Localizable_PL.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2F11336A2DA7015700498D34 /* Localizable_PL.strings */; };
 		2F26A8902C5CDBE500889F30 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F26A88F2C5CDBE500889F30 /* AppDelegate.swift */; };
 		2F26A8922C5CDBE500889F30 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F26A8912C5CDBE500889F30 /* SceneDelegate.swift */; };
 		2F26A8992C5CDBE600889F30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F26A8982C5CDBE600889F30 /* Assets.xcassets */; };
@@ -21,14 +17,10 @@
 		2F8A40EC2DA67A1C00076D34 /* GT-Eesti-Text-Thin-Trial.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2F8A40EB2DA67A1C00076D34 /* GT-Eesti-Text-Thin-Trial.otf */; };
 		2F8A40EE2DA6BA1400076D34 /* GT-Eesti-Text-Regular-Trial.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2F8A40ED2DA6BA1400076D34 /* GT-Eesti-Text-Regular-Trial.otf */; };
 		2FC01E122C788FDE00B5F508 /* ColorWheel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FC01E112C788FDE00B5F508 /* ColorWheel.swift */; };
+		2FD148E62DA813990039EECD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2FD148E42DA813990039EECD /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2F11335A2DA6FCE400498D34 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable_UK.strings; sourceTree = "<group>"; };
-		2F1133652DA7011800498D34 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable_EN.strings; sourceTree = "<group>"; };
-		2F1133682DA7013F00498D34 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable_ES.strings; sourceTree = "<group>"; };
-		2F11336B2DA7015700498D34 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable_PL.strings; sourceTree = "<group>"; };
-		2F26A88C2C5CDBE500889F30 /* Color Wheel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "Color Wheel.app"; path = "/Users/a-avramenko/Desktop/swift/Color Wheel копія/ColorWheel/build/Debug-iphoneos/Color Wheel.app"; sourceTree = "<absolute>"; };
 		2F26A88F2C5CDBE500889F30 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2F26A8912C5CDBE500889F30 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		2F26A8982C5CDBE600889F30 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -40,6 +32,11 @@
 		2F8A40EB2DA67A1C00076D34 /* GT-Eesti-Text-Thin-Trial.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GT-Eesti-Text-Thin-Trial.otf"; sourceTree = "<group>"; };
 		2F8A40ED2DA6BA1400076D34 /* GT-Eesti-Text-Regular-Trial.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GT-Eesti-Text-Regular-Trial.otf"; sourceTree = "<group>"; };
 		2FC01E112C788FDE00B5F508 /* ColorWheel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorWheel.swift; sourceTree = "<group>"; };
+		2FD148CC2DA808460039EECD /* Color Wheel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "Color Wheel.app"; path = "/Users/a-avramenko/Desktop/swift/Color Wheel копія/ColorWheel/build/Debug-iphoneos/Color Wheel.app"; sourceTree = "<absolute>"; };
+		2FD148E52DA813990039EECD /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/Localizable.strings; sourceTree = "<group>"; };
+		2FD148E72DA813AF0039EECD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		2FD148E82DA8149A0039EECD /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		2FD148E92DA814A80039EECD /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,10 +70,7 @@
 				2F26A89D2C5CDBE600889F30 /* Info.plist */,
 				2F8A40EB2DA67A1C00076D34 /* GT-Eesti-Text-Thin-Trial.otf */,
 				2F8A40ED2DA6BA1400076D34 /* GT-Eesti-Text-Regular-Trial.otf */,
-				2F1133592DA6FCE400498D34 /* Localizable_UK.strings */,
-				2F1133642DA7011800498D34 /* Localizable_EN.strings */,
-				2F1133672DA7013F00498D34 /* Localizable_ES.strings */,
-				2F11336A2DA7015700498D34 /* Localizable_PL.strings */,
+				2FD148E42DA813990039EECD /* Localizable.strings */,
 			);
 			path = "Color Wheel";
 			sourceTree = "<group>";
@@ -115,7 +109,7 @@
 			);
 			name = "Color Wheel";
 			productName = "Color Wheel";
-			productReference = 2F26A88C2C5CDBE500889F30 /* Color Wheel.app */;
+			productReference = 2FD148CC2DA808460039EECD /* Color Wheel.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -159,12 +153,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FD148E62DA813990039EECD /* Localizable.strings in Resources */,
 				2F8A40EE2DA6BA1400076D34 /* GT-Eesti-Text-Regular-Trial.otf in Resources */,
-				2F1133692DA7013F00498D34 /* Localizable_ES.strings in Resources */,
-				2F11335B2DA6FCE400498D34 /* Localizable_UK.strings in Resources */,
-				2F11336C2DA7015700498D34 /* Localizable_PL.strings in Resources */,
 				2F8A40EC2DA67A1C00076D34 /* GT-Eesti-Text-Thin-Trial.otf in Resources */,
-				2F1133662DA7011800498D34 /* Localizable_EN.strings in Resources */,
 				2F26A8992C5CDBE600889F30 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -189,36 +180,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		2F1133592DA6FCE400498D34 /* Localizable_UK.strings */ = {
+		2FD148E42DA813990039EECD /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				2F11335A2DA6FCE400498D34 /* uk */,
+				2FD148E52DA813990039EECD /* uk */,
+				2FD148E72DA813AF0039EECD /* en */,
+				2FD148E82DA8149A0039EECD /* es */,
+				2FD148E92DA814A80039EECD /* pl */,
 			);
-			name = Localizable_UK.strings;
-			sourceTree = "<group>";
-		};
-		2F1133642DA7011800498D34 /* Localizable_EN.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2F1133652DA7011800498D34 /* en */,
-			);
-			name = Localizable_EN.strings;
-			sourceTree = "<group>";
-		};
-		2F1133672DA7013F00498D34 /* Localizable_ES.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2F1133682DA7013F00498D34 /* es */,
-			);
-			name = Localizable_ES.strings;
-			sourceTree = "<group>";
-		};
-		2F11336A2DA7015700498D34 /* Localizable_PL.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2F11336B2DA7015700498D34 /* pl */,
-			);
-			name = Localizable_PL.strings;
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
