@@ -5,6 +5,8 @@
 //  Created by A-Avramenko on 02.08.2024.
 //
 
+// Структура папок/файлів на диску не відповідає структурі папок/файлів в проекті. Приклад - файли Model.swift, View.swift
+
 import UIKit
 
 @UIApplicationMain

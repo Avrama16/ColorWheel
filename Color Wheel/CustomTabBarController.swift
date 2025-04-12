@@ -11,6 +11,9 @@ class CustomTabBarController: UITabBarController, UITabBarControllerDelegate {
     // Додаємо властивість для зберігання стану колеса
     var currentStaticWheelType: StaticWheelType {
         get {
+            // Константи типу ключів UserDefaults треба зберігати в константах, бо зараз ти юзаєш їх в двох місцях - це вже error-prone
+            // в твоєму кейсі можна створити окремий файлік з екстеншеном для UserDefaults, var staticWheelTypeState: { get set }
+            // самі рядки можна при цьому тримати в fileprivate extension String {}
             let rawValue = UserDefaults.standard.integer(forKey: "StaticWheelTypeState")
             return StaticWheelType(rawValue: rawValue) ?? .type1
         }
@@ -67,7 +70,7 @@ class CustomTabBarController: UITabBarController, UITabBarControllerDelegate {
     
     private func setupViewControllers() {
         print("CustomTabBarController: Setting up view controllers")
-        let viewControllers = [
+        let viewControllers = [ // В тебе WheelType це CaseIterable. Ти можеш юзати allCases.map
             createViewController(for: .type2),
             createViewController(for: .type3),
             createViewController(for: .type1),
