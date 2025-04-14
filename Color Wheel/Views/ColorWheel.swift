@@ -1,5 +1,6 @@
 import UIKit
 
+// судячи з усього цей клас не потрібний, бо він тільки сетапить властивості UIImageView
 class ColorWheel: UIImageView {
 
     init() {

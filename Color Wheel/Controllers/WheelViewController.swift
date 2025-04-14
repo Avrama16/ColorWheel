@@ -1,7 +1,9 @@
 import UIKit
 
+// всі ці моделькі і менеджер треба в окремий файл винести. наприклад WheelStateManager
+
 // Синглтон для управління станом колеса
-final class WheelStateManager {
+final class WheelStateManager { // ти наразі не юзаєш сінглтон взагалі. твій клас зараз просто проксує стейт з стореджа
     static let shared = WheelStateManager()
     
     private init() {}
@@ -31,12 +33,14 @@ enum WheelType: Int, CaseIterable {
 }
 
 enum StaticWheelType: Int, CaseIterable {
+    // взагалі не зрозмумів різницю між цими двома типами. вони по суті однакові, бачу тільки в один кейс відрізняються; це точно можна обробити інакше, не дублювати типи
     case type1, type2, type3, type4
 }
 
 extension StaticWheelType {
     var staticWheelType: UIImage? {
         switch self {
+            // зараз ікскод генерує картинки у вигляді "UIImage.colorStaticBase". краще їх юзати, так не буде помилок з назвами
         case .type1: return UIImage(named: "ColorStaticBase")
         case .type2: return UIImage(named: "ColorStaticTint")
         case .type3: return UIImage(named: "ColorStaticMixed")
@@ -49,6 +53,8 @@ extension WheelType {
     var tabItemTitle: String {
         switch self {
         case .type1:
+                // коменти потрібні для тулзи яка генерує, вона ці коменти потім додає в локалізацію. а потім їх вже перекладачі дивляться
+                // тому нема сенсу витрачати на це час в твому кейсі
             return NSLocalizedString("Analogous scheme", comment: "Title for Analogous color scheme")
         case .type2:
             return NSLocalizedString("Complementary scheme", comment: "Title for Complementary color scheme")
@@ -92,9 +98,14 @@ final class WheelViewController: UIViewController {
     private let changeWheelButton = UIButton(type: .custom)
     private let infoButton = UIButton(type: .custom)
     
+    // ця змінна має бути weak var popupView: UIView?
+    // це гарантує, що ти її не утримуєш в пам'яті, і вона буде звільнена коли закриється
+    // + ти будеш перевіряти чи вона не nil. також не ок ініціалізовувати її просто вьюшкою, яку ти потім перезаписуєш
     var popupView = UIView()
+    // оці змінна (і напевно наступні теж) не маю ніякого сенсу
     var okButton = UIButton(type: .system)
     var closeButton = UIButton(type: .system)
+    // а ще в тебе частина змінних private, частина ні
     var backgroundView = UIView()
     
     init(wheelType: WheelType) {
@@ -294,6 +305,9 @@ final class WheelViewController: UIViewController {
     }
     
     @objc func showHint() {
+        // функція на 115 рядків взагалі не читаєма. цей попап це окремий компонент, який ти можеш юзати в різних місцях
+        // і він має бути в окремому файлі. а не тут в контролері
+        
         // Check if the popup is already open
         if popupView.superview != nil {
             return

@@ -113,6 +113,7 @@ class RotatingWheel: UIImageView {
             print("RotatingWheel: Pan began - lastPoint: \(String(describing: lastPoint))")
             
         case .changed:
+            // тут в тебе варнінг. звертай на них увагу
             guard let lastPoint = lastPoint else { return }
             
             // Розраховуємо кут між поточною точкою та центром
@@ -175,6 +176,7 @@ class RotatingWheel: UIImageView {
         lastRotation = 0
         lastPoint = nil
         lastAngle = 0
+        // два підряд рядка використовують різний підхід - перший через точку, другий через тип
         lastVelocity = .zero
         transform = CGAffineTransform.identity
         print("RotatingWheel: Reset rotation")

@@ -7,9 +7,10 @@
 
 import UIKit
 
+// не побачив в додатку цього екрану
 class LanguageSelectionViewController: UITableViewController {
 
-    let languages = ["Українська", "Polski", "English", "Français"]
+    let languages = ["Українська", "Polski", "English", "Français"] // Такі речі треба в enum'і описувати
     var selectedLanguage: String?
 
     override func viewDidLoad() {
